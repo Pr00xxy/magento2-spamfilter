@@ -1,0 +1,26 @@
+{
+    "name": "prooxxy/spamfilter",
+    "license": "GPL-3.0",
+    "description": "Module for blocking unwanted spam to a magento 2 store",
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "Hampus Westman",
+            "email": "hampus.westman@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "~7.1.0|~7.2.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Lybe\\Honeypot\\": ""
+        }
+    }
+}

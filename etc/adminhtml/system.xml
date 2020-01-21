@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+
+        <tab id="prooxxy" sortOrder="10">
+            <label>PrOOxxy</label>
+        </tab>
+
+        <section id="spamfilter" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+
+            <class>separator-top</class>
+            <label>SpamFilter</label>
+            <tab>prooxxy</tab>
+            <resource>PrOOxxy_SpamFilter::spamfilter_config</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+
+                <label>General Configuration</label>
+
+                <field id="module_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Module Enable</label>
+                    <config_path>spamfilter/general/module_status</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="email_blocked_addresses" type="textarea" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Blocked Addresses</label>
+                    <config_path>spamfilter/general/email_blocked_addresses</config_path>
+                </field>
+
+            </group>
+
+            <group id="account_create" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Customer Create Configuration</label>
+
+                <field id="spamfilter_account_create_scope_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label> Scope Enabled </label>
+                    <config_path>spamfilter/account_create/scope_enable</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_account_create_link_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Link Blocking Status</label>
+                    <config_path>spamfilter/account_create/link_blocking_enable</config_path>
+                    <depends><field id="spamfilter_account_create_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_account_create_email_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Blocking Status</label>
+                    <config_path>spamfilter/account_create/email_blocking_enable</config_path>
+                    <depends><field id="spamfilter_account_create_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_account_create_alphabet_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Alphabet Blocking</label>
+                    <config_path>spamfilter/account_create/alphabet_blocking_enable</config_path>
+                    <depends><field id="spamfilter_account_create_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_account_create_alphabet_blocked_alphabets" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Blocked Alphabets</label>
+                    <config_path>spamfilter/account_create/alphabet_blocked_alphabets</config_path>
+                    <depends><field id="spamfilter_account_create_scope_enable">1</field></depends>
+                    <source_model>PrOOxxy\SpamFilter\Model\Config\Source\Languages</source_model>
+                </field>
+            </group>
+
+            <group id="contact_form" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Contact Form Configuration</label>
+
+                <field id="spamfilter_contact_form_scope_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Scope Enabled</label>
+                    <config_path>spamfilter/contact_form/scope_enable</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_contact_form_link_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Link Blocking Status</label>
+                    <config_path>spamfilter/contact_form/link_blocking_enable</config_path>
+                    <depends><field id="spamfilter_contact_form_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_contact_form_email_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Blocking Status</label>
+                    <config_path>spamfilter/contact_form/email_blocking_enable</config_path>
+                    <depends><field id="spamfilter_contact_form_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_contact_form_alphabet_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Alphabet Blocking</label>
+                    <config_path>spamfilter/contact_form/alphabet_blocking_enable</config_path>
+                    <depends><field id="spamfilter_contact_form_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_contact_form_alphabet_blocked_alphabets" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Blocked Alphabets</label>
+                    <config_path>spamfilter/contact_form/alphabet_blocked_alphabets</config_path>
+                    <depends><field id="spamfilter_contact_form_scope_enable">1</field></depends>
+                    <source_model>PrOOxxy\SpamFilter\Model\Config\Source\Languages</source_model>
+                </field>
+            </group>
+
+            <group id="newsletter_signup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Newsletter Signup Configuration</label>
+
+                <field id="newsletter_signup_scope_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Scope Enabled</label>
+                    <config_path>spamfilter/newsletter_signup/scope_enable</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="newsletter_signup_email_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Blocking Status</label>
+                    <config_path>spamfilter/newsletter_signup/email_blocking_enable</config_path>
+                    <depends><field id="newsletter_signup_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="newsletter_signup_alphabet_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Alphabet Blocking</label>
+                    <config_path>spamfilter/newsletter_signup/alphabet_blocking_enable</config_path>
+                    <depends><field id="newsletter_signup_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="newsletter_signup_alphabet_blocked_alphabets" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Blocked Alphabets</label>
+                    <config_path>spamfilter/newsletter_signup/alphabet_blocked_alphabets</config_path>
+                    <depends><field id="newsletter_signup_scope_enable">1</field></depends>
+                    <source_model>PrOOxxy\SpamFilter\Model\Config\Source\Languages</source_model>
+                </field>
+            </group>
+
+            <!-- <group id="PLACEHOLDER" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Newsletter Signup Configuration</label>
+
+                <field id="PLACEHOLDER_scope_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Scope Enabled</label>
+                    <config_path>spamfilter/PLACEHOLDER/scope_enable</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="spamfilter_PLACEHOLDER_link_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Link Blocking Status</label>
+                    <config_path>spamfilter/PLACEHOLDER/link_blocking_enable</config_path>
+                    <depends><field id="PLACEHOLDER_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="PLACEHOLDER_email_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Blocking Status</label>
+                    <config_path>spamfilter/PLACEHOLDER/email_blocking_enable</config_path>
+                    <depends><field id="PLACEHOLDER_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="PLACEHOLDER_alphabet_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Alphabet Blocking</label>
+                    <config_path>spamfilter/PLACEHOLDER/alphabet_blocking_enable</config_path>
+                    <depends><field id="PLACEHOLDER_scope_enable">1</field></depends>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+
+                <field id="PLACEHOLDER_alphabet_blocked_alphabets" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Blocked Alphabets</label>
+                    <config_path>spamfilter/PLACEHOLDER/alphabet_blocked_alphabets</config_path>
+                    <depends><field id="PLACEHOLDER_scope_enable">1</field></depends>
+                    <source_model>PrOOxxy\SpamFilter\Model\Config\Source\Languages</source_model>
+                </field>
+
+            </group> -->
+
+        </section>
+    </system>
+</config>

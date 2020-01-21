@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <spamfilter>
+            <general>
+                <enable>0</enable>
+                <email_blocked_addresses>*@qq.com, *@163.com, *@example.com, *@QQ.COM, *@yjhengxing.com, *@sina.com, *@cacnature.com, *@126.com, *@gmail.ru, *@yandex.ru, *@bk.ru, *@ukr.net, *@ya.ru, *@rambler.ru, *@list.ru, *@inbox.ru, *@yandex.by, *@gmil.com</email_blocked_addresses>
+            </general>
+            <account_create>
+                <scope_enable>0</scope_enable>
+                <link_blocking_enable>0</link_blocking_enable>
+                <email_blocking_enable>0</email_blocking_enable>
+                <alphabet_blocking_enable>0</alphabet_blocking_enable>
+            </account_create>
+            <contact_form>
+                <scope_enable>0</scope_enable>
+                <link_blocking_enable>0</link_blocking_enable>
+                <email_blocking_enable>0</email_blocking_enable>
+                <alphabet_blocking_enable>0</alphabet_blocking_enable>
+            </contact_form>
+            <newsletter_signup>
+                <scope_enable>0</scope_enable>
+                <link_blocking_enable>0</link_blocking_enable>
+                <email_blocking_enable>0</email_blocking_enable>
+                <alphabet_blocking_enable>0</alphabet_blocking_enable>
+            </newsletter_signup>
+            <!-- <PLACEHOLDER>
+                <scope_enable>0</scope_enable>
+                <link_blocking_enable>0</link_blocking_enable>
+                <email_blocking_enable>0</email_blocking_enable>
+                <alphabet_blocking_enable>0</alphabet_blocking_enable>
+            </PLACEHOLDER> -->
+        </spamfilter>
+    </default>
+</config>
