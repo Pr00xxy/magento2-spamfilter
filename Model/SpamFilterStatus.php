@@ -35,7 +35,9 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 class SpamFilterStatus
 {
 
-    /** @var ScopeConfigInterface */
+    /**
+     * @var ScopeConfigInterface
+     */
     private $config;
 
     private const MODULE_STATUS_CONFIG_PATH = 'spamfilter/general/module_status';
@@ -59,7 +61,7 @@ class SpamFilterStatus
 
     public function isScopeEnabled(): bool
     {
-        return $this->isSpamFilterEnabled() ? $this->config->getValue("spamfilter/{$this->scope}/scope_enable") : false;
+        return $this->isSpamFilterEnabled() ? (bool) $this->config->getValue("spamfilter/{$this->scope}/scope_enable") : false;
     }
 
     public function isLinkBlockingEnabled(): bool
@@ -79,7 +81,7 @@ class SpamFilterStatus
 
     public function getBlockedAddresses(): array
     {
-        return (array) preg_split(
+        return (array) \preg_split(
             '/,|\n/',
             $this->config->getValue('spamfilter/general/email_blocked_addresses')
         );
@@ -91,6 +93,6 @@ class SpamFilterStatus
         if (empty($blockedAlphabets)) {
             return [];
         }
-        return (array) explode(',', $blockedAlphabets);
+        return (array) \explode(',', $blockedAlphabets);
     }
 }
