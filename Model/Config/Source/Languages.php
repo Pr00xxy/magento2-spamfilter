@@ -1,19 +1,15 @@
 <?php
 
-namespace PrOOxxy\Honeypot\Model\Config\Source;
+namespace PrOOxxy\SpamFilter\Model\Config\Source;
 
 class Languages implements \Magento\Framework\Data\OptionSourceInterface
 {
-    /**
-     * Return array of regex languages
-     */
     public function toOptionArray(): array
     {
         return [
             [
                 'label' => 'Arabic',
                 'value' => '/\p{Arabic}+/u',
-
             ],
             [
                 'label' => 'Armenian',
@@ -66,7 +62,6 @@ class Languages implements \Magento\Framework\Data\OptionSourceInterface
             [
                 'label' => 'Hebrew',
                 'value' => '/\p{Hebrew}+/u',
-
             ],
             [
                 'label' => 'Kannada',
@@ -99,37 +94,30 @@ class Languages implements \Magento\Framework\Data\OptionSourceInterface
             [
                 'label' => 'Sinhala',
                 'value' => '/\p{Sinhala}+/u',
-
             ],
             [
                 'label' => 'Syriac',
                 'value' => '/\p{Syriac}+/u',
-
             ],
             [
                 'label' => 'Tagbanwa',
                 'value' => '/\p{Tagbanwa}+/u',
-
             ],
             [
                 'label' => 'Tamil',
                 'value' => '/\p{Tamil}+/u',
-
             ],
             [
                 'label' => 'Telugu',
                 'value' => '/\p{Telugu}+/u',
-
             ],
             [
                 'label' => 'Thaana',
                 'value' => '/\p{Thaana}+/u',
-                'validation'
             ],
             [
                 'label' => 'Thai',
                 'value' => '/\p{Thai}+/u',
-
             ],
             [
                 'label' => 'Tibetan',
