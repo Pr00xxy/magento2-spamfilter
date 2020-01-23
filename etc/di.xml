@@ -29,19 +29,19 @@
 
    <!-- Virtual filterStatuses START -->
 
-   <virtualType name="PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
       <arguments>
          <argument name="scope" xsi:type="string">contact_form</argument>
       </arguments>
    </virtualType>
 
-   <virtualType name="PrOOxxy\SpamFilter\VirtualType\AccountCreateFilterStatus" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\AccountCreateFilterStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
       <arguments>
          <argument name="scope" xsi:type="string">account_create</argument>
       </arguments>
    </virtualType>
 
-   <virtualType name="PrOOxxy\SpamFilter\VirtualType\NewsletterFilterStatus" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\NewsletterFilterStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
       <arguments>
          <argument name="scope" xsi:type="string">newsletter_signup</argument>
       </arguments>
@@ -51,21 +51,21 @@
 
    <!-- Virtual Validators START -->
 
-   <virtualType name="PrOOxxy\SpamFilter\VirtualType\AccountCreateValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\AccountCreateValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
       <arguments>
          <argument name="scope" xsi:type="string">account_create</argument>
          <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus</argument>
       </arguments>
    </virtualType>
 
-   <virtualType name="PrOOxxy\SpamFilter\VirtualType\ContactFormValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\ContactFormValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
       <arguments>
          <argument name="scope" xsi:type="string">contact_form</argument>
          <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus</argument>
       </arguments>
    </virtualType>
 
-   <virtualType name="PrOOxxy\SpamFilter\VirtualType\NewsletterSignupValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\NewsletterSignupValidator" type="PrOOxxy\SpamFilter\Model\Validator\DefaultValidator">
       <arguments>
          <argument name="scope" xsi:type="string">newsletter_signup</argument>
          <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus</argument>
@@ -76,22 +76,22 @@
 
    <type name="PrOOxxy\SpamFilter\Model\Blocker\ContactFormBlocker">
       <arguments>
-         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\VirtualType\ContactFormValidator</argument>
+         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormValidator</argument>
          <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormFilterStatus</argument>
       </arguments>
    </type>
 
    <type name="PrOOxxy\SpamFilter\Model\Blocker\AccountCreateBlocker">
       <arguments>
-         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\VirtualType\AccountCreateValidator</argument>
-         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\VirtualType\AccountCreateFilterStatus</argument>
+         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\Virtual\AccountCreateValidator</argument>
+         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\AccountCreateFilterStatus</argument>
       </arguments>
    </type>
 
    <type name="PrOOxxy\SpamFilter\Model\Blocker\NewsletterBlocker">
       <arguments>
-         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\VirtualType\NewsletterSignupValidator</argument>
-         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\VirtualType\NewsletterFilterStatus</argument>
+         <argument name="validator" xsi:type="object">PrOOxxy\SpamFilter\Virtual\NewsletterSignupValidator</argument>
+         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\NewsletterFilterStatus</argument>
       </arguments>
    </type>
 

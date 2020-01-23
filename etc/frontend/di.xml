@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
-        <plugin name="restrictCustomerData" type="SaveCustomerPlugin" />
+        <plugin name="restrictCustomerData" type="PrOOxxy\SpamFilter\Plugin\SaveCustomerPlugin" />
     </type>
 
     <type name="Magento\Contact\Controller\Index\Post">
-        <plugin name="restrictContactForm" type="ContactFormPostPlugin" />
+        <plugin name="restrictContactForm" type="PrOOxxy\SpamFilter\Plugin\ContactFormPostPlugin" />
     </type>
 
     <type name="Magento\Newsletter\Model\Subscriber">
-        <plugin name="restrictNewsletterSubscription" type="SubscriberPlugin" />
+        <plugin name="restrictNewsletterSubscription" type="PrOOxxy\SpamFilter\Plugin\SubscriberPlugin" />
     </type>
 </config>
