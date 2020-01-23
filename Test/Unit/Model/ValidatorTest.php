@@ -77,7 +77,7 @@ class ValidatorTest extends TestCase
 
     /**
      * @dataProvider StringHasLinkDataProvider
-     * @see          \PrOOxxy\SpamFilter\Model\Validator\DefaultValidator::stringHasLink
+     * @see          \PrOOxxy\SpamFilter\Model\Validator\DefaultValidator::stringHasLink()
      */
     public function testStringHasLink(string $string, bool $assertion)
     {
@@ -98,6 +98,7 @@ class ValidatorTest extends TestCase
 
     /**
      * @dataProvider emailIsValidDataProvider
+     * @see          \PrOOxxy\SpamFilter\Model\Validator\DefaultValidator::emailIsValid()
      */
     public function testEmailIsValid(string $emailString, bool $assertion)
     {
@@ -120,6 +121,7 @@ class ValidatorTest extends TestCase
 
     /**
      * @dataProvider stringMatchingAlphabetDataProvider
+     * @see \PrOOxxy\SpamFilter\Model\Validator\DefaultValidator::isStringMatchingBlockedAlphabet()
      */
     public function testIsStringMatchingBlockedAlphabet(string $string, bool $assertion)
     {
@@ -140,6 +142,7 @@ class ValidatorTest extends TestCase
 
     /**
      * @dataProvider getAlphabetByStringDataProvider
+     * @see \PrOOxxy\SpamFilter\Model\Validator\DefaultValidator::getAlphabetByString()
      */
     public function testGetAlphabetByString(string $string, $assertion)
     {
