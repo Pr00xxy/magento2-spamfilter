@@ -43,19 +43,13 @@ class SpamFilterStatus
      * @var string
      */
     private $scope;
-    /**
-     * @var string
-     */
-    private $status;
 
     public function __construct(
         ScopeConfigInterface $config,
-        $scope = '',
-        $status = ''
+        $scope = ''
     ) {
         $this->config = $config;
         $this->scope = $scope;
-        $this->status = $status;
     }
 
     public function isSpamFilterEnabled(): bool
