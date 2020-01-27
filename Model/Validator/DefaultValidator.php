@@ -31,44 +31,41 @@ class DefaultValidator
         // @codingStandardsIgnoreStart
         $urlRegexPattern = '/(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|))?/m';
         // @codingStandardsIgnoreEnd
-        return (bool) preg_match($urlRegexPattern, $dataPost);
+        return (bool) \preg_match($urlRegexPattern, $dataPost);
     }
 
     public function emailIsValid($email): bool
     {
         $domains = $this->status->getBlockedAddresses();
 
-        if (!$domains || empty($domains)) {
-            return true;
-        }
-
-        if (!is_array($domains)) {
+        if (!$domains || !\is_array($domains)) {
             return true;
         }
 
         foreach ($domains as $key => $filter) {
 
-            if (empty(trim($filter))) {
+            if (empty(\trim($filter))) {
                 continue;
             }
 
-            if (strpos($filter, '@') === false) {
+            if (\strpos($filter, '@') === false) {
                 continue;
             }
 
-            $expr = '/' . trim(str_replace('*', '(.*?)', str_replace('.', '\.', $filter))) . '/';
-            if (preg_match($expr, $email)) {
+            $expression = '/' . \trim(\str_replace('*', '(.*?)', \str_replace('.', '\.', $filter))) . '/';
+            if (\preg_match($expression, $email)) {
                 return false;
             }
         }
 
         return true;
+
     }
 
     public function isStringMatchingBlockedAlphabet(string $string): bool
     {
-        foreach ($this->status->getBlockedAlphabets($this->scope) as $alphabet) {
-            if (preg_match($alphabet, $string)) {
+        foreach ($this->status->getBlockedAlphabets() as $alphabet) {
+            if (\preg_match($alphabet, $string)) {
                 return true;
             }
         }
@@ -81,10 +78,10 @@ class DefaultValidator
     public function getAlphabetByString(string $string)
     {
 
-        $blockedAlphabets = $this->status->getBlockedAlphabets($this->scope);
+        $blockedAlphabets = $this->status->getBlockedAlphabets();
         foreach ($blockedAlphabets as $alphabet) {
-            if (preg_match($alphabet, $string)) {
-                preg_match('/{(.*?)}/', $alphabet, $match);
+            if (\preg_match($alphabet, $string)) {
+                \preg_match('/{(.*?)}/', $alphabet, $match);
                 return $match[1];
             }
         }
