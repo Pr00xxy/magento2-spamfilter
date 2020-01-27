@@ -3,7 +3,7 @@
     "license": "GPL-3.0",
     "description": "Module for blocking unwanted spam to a magento 2 store",
     "type": "magento2-module",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Hampus Westman",
@@ -13,7 +13,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "~7.1.0|~7.2.0"
+        "php": "~7.2"
     },
     "autoload": {
         "files": [
