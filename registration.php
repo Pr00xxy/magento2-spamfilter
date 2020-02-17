@@ -1,6 +1,6 @@
 <?php
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'PrOOxxy_Honeypot',
+    'PrOOxxy_SpamFilter',
     __DIR__
 );
