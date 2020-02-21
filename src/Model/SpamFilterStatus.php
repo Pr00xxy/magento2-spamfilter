@@ -27,7 +27,6 @@
  */
 declare(strict_types=1);
 
-
 namespace PrOOxxy\SpamFilter\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;

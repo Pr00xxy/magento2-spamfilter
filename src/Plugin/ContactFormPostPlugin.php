@@ -31,20 +31,34 @@ declare(strict_types=1);
 namespace PrOOxxy\SpamFilter\Plugin;
 
 use Magento\Framework\Exception\LocalizedException;
-use PrOOxxy\SpamFilter\Model\Blocker\ContactFormBlocker;
+use Magento\Framework\Message\ManagerInterface;
+use PrOOxxy\SpamFilter\Model\Rules\ContactForm;
+use PrOOxxy\SpamFilter\Model\RulesProcessor;
 
 class ContactFormPostPlugin
 {
 
     /**
-     * @var ContactFormBlocker
+     * @var ContactForm
      */
-    private $blocker;
+    private $contactFormRules;
+    /**
+     * @var ManagerInterface
+     */
+    private $manager;
+    /**
+     * @var RulesProcessor
+     */
+    private $rulesProcessor;
 
     public function __construct(
-        ContactFormBlocker $blocker
-    ) {
-        $this->blocker = $blocker;
+        ContactForm $contactFormRules,
+        ManagerInterface $manager,
+        RulesProcessor $rulesProcessor
+    )  {
+        $this->contactFormRules = $contactFormRules;
+        $this->manager = $manager;
+        $this->rulesProcessor = $rulesProcessor;
     }
 
     public function beforeExecute(
@@ -52,10 +66,10 @@ class ContactFormPostPlugin
     ) {
 
         $request = $subject->getRequest();
-        if (trim($request->getParam('name')) === '') {
+        if (\trim($request->getParam('name')) === '') {
             throw new LocalizedException(__('Enter the Name and try again.'));
         }
-        if (trim($request->getParam('comment')) === '') {
+        if (\trim($request->getParam('comment')) === '') {
             throw new LocalizedException(__('Enter the comment and try again.'));
         }
         if (false === \strpos($request->getParam('email'), '@')) {
@@ -68,7 +82,16 @@ class ContactFormPostPlugin
             'email'     => $request->getParam('email')
         ];
 
-        $this->blocker->execute($dataPosts);
+        $collection = $this->contactFormRules->addRules();
+
+        $messages = $this->rulesProcessor->process($collection, $dataPosts);
+
+        if (!empty($messages)) {
+            foreach ($messages as $message) {
+                $this->manager->addErrorMessage($message);
+            }
+            throw new LocalizedException(__('SpamFilter: Could not save customer'));
+        }
 
         return null;
     }

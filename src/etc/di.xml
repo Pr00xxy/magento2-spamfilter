@@ -1,0 +1,95 @@
+<!--
+  ~
+  ~ di.xml
+  ~
+  ~ This file is part of Foobar.
+  ~
+  ~ {module_name} is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ {module_name} is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with {module_name}.  If not, see <https://www.gnu.org/licenses/>.
+  ~
+  ~ @category   Pr00xxy
+  ~ @package    {package_name}
+  ~ @author     Hampus Westman <hampus.westman@gmail.com>
+  ~ @copyright  Copyright (c) 2020 Hampus Westman
+  ~ @license    https://www.gnu.org/licenses/gpl-3.0.html  GPLv3.0
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+   <!-- Virtual filterStatuses START -->
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\ContactFormStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
+      <arguments>
+         <argument name="scope" xsi:type="string">contact_form</argument>
+      </arguments>
+   </virtualType>
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\AccountCreateStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
+      <arguments>
+         <argument name="scope" xsi:type="string">account_create</argument>
+      </arguments>
+   </virtualType>
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\NewsletterStatus" type="PrOOxxy\SpamFilter\Model\SpamFilterStatus">
+      <arguments>
+         <argument name="scope" xsi:type="string">newsletter_signup</argument>
+      </arguments>
+   </virtualType>
+
+   <!-- Virtual filterStatuses STOP -->
+
+   <!-- Virtual ValidatorBuilders START -->
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\AccountCreateValidatorBuilder" type="PrOOxxy\SpamFilter\Model\ValidatorBuilder">
+      <arguments>
+         <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormStatus</argument>
+      </arguments>
+   </virtualType>
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\ContactFormValidatorBuilder" type="PrOOxxy\SpamFilter\Model\ValidatorBuilder">
+      <arguments>
+         <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormStatus</argument>
+      </arguments>
+   </virtualType>
+
+   <virtualType name="PrOOxxy\SpamFilter\Virtual\NewsletterValidatorBuilder" type="PrOOxxy\SpamFilter\Model\ValidatorBuilder">
+      <arguments>
+         <argument name="status" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormStatus</argument>
+      </arguments>
+   </virtualType>
+
+   <!-- Virtual ValidatorBuilders STOP -->
+
+   <type name="PrOOxxy\SpamFilter\Model\Rules\ContactForm">
+      <arguments>
+         <argument name="validatorBuilder" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormValidatorBuilder</argument>
+         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\ContactFormStatus</argument>
+      </arguments>
+   </type>
+
+   <type name="PrOOxxy\SpamFilter\Model\Rules\AccountCreate">
+      <arguments>
+         <argument name="validatorBuilder" xsi:type="object">PrOOxxy\SpamFilter\Virtual\AccountCreateValidatorBuilder</argument>
+         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\AccountCreateStatus</argument>
+      </arguments>
+   </type>
+
+   <type name="PrOOxxy\SpamFilter\Model\Rules\Newsletter">
+      <arguments>
+         <argument name="validatorBuilder" xsi:type="object">PrOOxxy\SpamFilter\Virtual\NewsletterValidatorBuilder</argument>
+         <argument name="filterStatus" xsi:type="object">PrOOxxy\SpamFilter\Virtual\NewsletterStatus</argument>
+      </arguments>
+   </type>
+
+</config>

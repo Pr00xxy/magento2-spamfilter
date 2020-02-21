@@ -27,56 +27,59 @@
  */
 declare(strict_types=1);
 
+namespace PrOOxxy\SpamFilter\Model\Rules;
 
-namespace PrOOxxy\SpamFilter\Model\Blocker;
-
-
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\ValidatorFactory;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 use PrOOxxy\SpamFilter\Model\Validator\DefaultValidator;
+use PrOOxxy\SpamFilter\Model\ValidatorBuilder;
 
-class NewsletterBlocker
+class Newsletter implements RulesInterface
 {
-    /**
-     * @var DefaultValidator
-     */
-    private $validator;
+
     /**
      * @var SpamFilterStatus
      */
     private $filterStatus;
 
-    public function __construct(
-        DefaultValidator $validator,
-        SpamFilterStatus $filterStatus
-    )
-    {
-        $this->validator = $validator;
-        $this->filterStatus = $filterStatus;
-    }
+    /**
+     * @var ValidatorBuilder
+     */
+    private $validatorBuilder;
 
     /**
-     * @param string $email
-     * @return bool
-     * @throws LocalizedException
+     * @var ValidatorFactory
      */
-    public function execute(string $email)
+    private $validatorFactory;
+
+    public function __construct(
+        SpamFilterStatus $filterStatus,
+        ValidatorBuilder $validatorBuilder,
+        ValidatorFactory $validatorFactory
+    ) {
+        $this->filterStatus = $filterStatus;
+        $this->validatorBuilder = $validatorBuilder;
+        $this->validatorFactory = $validatorFactory;
+    }
+
+    public function addRules(): array
     {
 
         if (!$this->filterStatus->isScopeEnabled()) {
-            return true;
+            return [];
         }
 
-        $alphabetBlockingStatus = $this->filterStatus->isAlphabetBlockingEnabled();
-        $emailBlockingStatus = $this->filterStatus->isEmailBlockingEnabled();
+        $collection = [
+            'email' => $this->validatorFactory->create()
+        ];
 
-        if ($alphabetBlockingStatus && $this->validator->isStringMatchingBlockedAlphabet($email)) {
-            $blockedByAlphabet = $this->validator->getAlphabetByString($email);
-            throw new LocalizedException(__('%1 contains %2 characters which are forbidden', 'email', $blockedByAlphabet));
+        if ($this->filterStatus->isEmailBlockingEnabled()) {
+            $collection['email']->addValidator(
+                $this->validatorBuilder->getNewEmailValidator('email')
+            );
         }
 
-        if ($emailBlockingStatus && !$this->validator->emailIsValid($email)) {
-            throw new LocalizedException(__('Email %1 is blocked due to spam', $email));
-        }
+        return $collection;
+
     }
 }

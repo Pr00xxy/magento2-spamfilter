@@ -121,20 +121,6 @@
                     <depends><field id="newsletter_signup_scope_enable">1</field></depends>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
                 </field>
-
-                <field id="newsletter_signup_alphabet_blocking_enable" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Alphabet Blocking</label>
-                    <config_path>spamfilter/newsletter_signup/alphabet_blocking_enable</config_path>
-                    <depends><field id="newsletter_signup_scope_enable">1</field></depends>
-                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
-                </field>
-
-                <field id="newsletter_signup_alphabet_blocked_alphabets" type="multiselect" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Blocked Alphabets</label>
-                    <config_path>spamfilter/newsletter_signup/alphabet_blocked_alphabets</config_path>
-                    <depends><field id="newsletter_signup_scope_enable">1</field></depends>
-                    <source_model>PrOOxxy\SpamFilter\Model\Config\Source\Languages</source_model>
-                </field>
             </group>
 
             <!-- <group id="PLACEHOLDER" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
