@@ -1,7 +1,7 @@
 {
     "name": "prooxxy/spamfilter",
     "license": "GPL-3.0",
-    "description": "Module for blocking unwanted spam to a magento 2 store",
+    "description": "Spam filter module for magento 2",
     "type": "magento2-module",
     "version": "1.0.0",
     "authors": [
