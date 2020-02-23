@@ -42,8 +42,8 @@ Block newsletter signup, customer registration or contact form entries from spec
 
 ## Compability
 
-Compability tested with Magento 2.3.x on PHP 7.2
-Compability with 2.2.x and PHP < 7.2 is not guaranteed but may work
+Compability tested with Magento 2.3.x on PHP 7.2  
+Compability with 2.2.x and PHP < 7.2 is not guaranteed but may work  
 
 ## License
 [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
