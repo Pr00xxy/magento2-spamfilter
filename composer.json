@@ -1,23 +1,23 @@
 {
     "name": "prooxxy/spamfilter",
-    "license": "GPL-3.0",
     "description": "Spam filter module for magento 2",
+    "keywords": ["Magento 2", "Magento 2 module", "spam protection"],
+    "license": "MIT",
     "type": "magento2-module",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "Hampus Westman",
             "email": "hampus.westman@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
-        "php": "~7.2"
+        "php": "~7.2|~7.3"
     },
     "autoload": {
+        "files": [ "registration.php" ],
         "psr-4": {
-            "PrOOxxy\\SpamFilter\\": "src/"
+            "PrOOxxy\\SpamFilter\\": ""
         }
     }
 }
