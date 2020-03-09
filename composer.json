@@ -1,5 +1,5 @@
 {
-    "name": "prooxxy/spamfilter",
+    "name": "prooxxy/magento2-spamfilter",
     "description": "Spam filter module for magento 2",
     "keywords": ["Magento 2", "Magento 2 module", "spam protection"],
     "license": "MIT",
