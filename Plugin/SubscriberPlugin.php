@@ -9,7 +9,6 @@
  * @link       https://github.com/Pr00xxy
  *
  */
-
 declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
@@ -21,6 +20,21 @@ use PrOOxxy\SpamFilter\Model\RulesProcessor;
 
 class SubscriberPlugin
 {
+
+    /**
+     * @var RulesProcessor
+     */
+    private $rulesProcessor;
+
+    /**
+     * @var ManagerInterface
+     */
+    private $manager;
+
+    /**
+     * @var Newsletter
+     */
+    private $newsletterRules;
 
     public function __construct(
         Newsletter $newsletterRules,
@@ -48,5 +62,7 @@ class SubscriberPlugin
             }
             throw new LocalizedException(__('SpamFilter: Could not save customer'));
         }
+
+        return null;
     }
 }

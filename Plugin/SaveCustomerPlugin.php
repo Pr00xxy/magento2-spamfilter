@@ -9,6 +9,7 @@
  * @link       https://github.com/Pr00xxy
  *
  */
+declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
 
@@ -24,10 +25,12 @@ class SaveCustomerPlugin
      * @var AccountCreate
      */
     private $accountCreateRules;
+
     /**
      * @var ManagerInterface
      */
     private $manager;
+
     /**
      * @var RulesProcessor
      */
@@ -71,6 +74,7 @@ class SaveCustomerPlugin
             throw new LocalizedException(__('SpamFilter: Could not save customer'));
         }
 
+        return null;
 
     }
 

@@ -58,7 +58,7 @@ class EmailValidator extends \Zend_Validate_Abstract implements \Magento\Framewo
         return true;
     }
 
-    public function isDomainBlocked(string $email): bool
+    private function isDomainBlocked(string $email): bool
     {
 
         $domains = $this->config->getBlockedAddresses();

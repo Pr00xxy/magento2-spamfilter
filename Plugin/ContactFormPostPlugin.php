@@ -9,7 +9,6 @@
  * @link       https://github.com/Pr00xxy
  *
  */
-
 declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
@@ -26,10 +25,12 @@ class ContactFormPostPlugin
      * @var ContactForm
      */
     private $contactFormRules;
+
     /**
      * @var ManagerInterface
      */
     private $manager;
+
     /**
      * @var RulesProcessor
      */

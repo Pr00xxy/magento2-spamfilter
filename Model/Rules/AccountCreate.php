@@ -26,10 +26,12 @@ class AccountCreate implements RulesInterface
      * @var SpamFilterStatus
      */
     private $filterStatus;
+
     /**
      * @var ValidatorBuilder
      */
     private $validatorBuilder;
+
     /**
      * @var ValidatorFactory
      */

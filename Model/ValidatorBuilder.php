@@ -14,13 +14,13 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model;
 
+use InvalidArgumentException;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory;
-use Psr\Log\InvalidArgumentException;
 
 class ValidatorBuilder
 {

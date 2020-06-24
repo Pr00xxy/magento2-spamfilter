@@ -35,8 +35,7 @@ class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framewor
 
     public function __construct(
         string $field
-    )
-    {
+    ) {
         $this->field = $field;
     }
 
@@ -56,7 +55,7 @@ class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framewor
         return true;
     }
 
-    public function stringHasLink(string $value): bool
+    private function stringHasLink(string $value): bool
     {
         return (bool) \preg_match($this->pattern, $value);
     }
