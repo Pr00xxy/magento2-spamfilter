@@ -30,6 +30,8 @@ This module provides blocking for three areas in your installation
 
 All three areas can be configured independently to have custom rules for what can be inputted.
 
+![scoped config](docs/scoped_config.png)
+
 ### Alphabet blocking
 
 Block entries based on a list of languages.
@@ -43,6 +45,8 @@ Block customers from putting links in their firstname or lastname
 ### Email Blocking
 
 Block newsletter signup, customer registration or contact form entries from specific domains
+
+![block known domains](docs/spam_reg_domain.png)
 
 ## Compability
 
