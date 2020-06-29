@@ -10,11 +10,6 @@ class EmailValidatorTest extends TestCase
 {
 
     /**
-     * @var $objectManager
-     */
-    private $objectManager;
-
-    /**
      * @var $model \PrOOxxy\SpamFilter\Model\Validator\EmailValidator
      */
     private $model;
@@ -28,13 +23,13 @@ class EmailValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->objectManager = new ObjectManager($this);
+        $objectManager = new ObjectManager($this);
 
         $this->spamFilterStatus = $this->getMockBuilder(SpamFilterStatus::class)
             ->disableOriginalConstructor()
             ->setMethods(['getBlockedAddresses'])->getMock();
 
-        $this->model = $this->objectManager->getObject(
+        $this->model = $objectManager->getObject(
             \PrOOxxy\SpamFilter\Model\Validator\EmailValidator::class,
             [
                 'config' => $this->spamFilterStatus,

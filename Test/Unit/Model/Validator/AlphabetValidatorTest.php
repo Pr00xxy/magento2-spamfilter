@@ -12,36 +12,26 @@ class AlphabetValidatorTest extends TestCase
 {
 
     /**
-     * @var $objectManager
-     */
-    private $objectManager;
-
-    /**
      * @var $model \PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator
      */
     private $model;
-
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
-    private $spamFilterStatus;
 
     public function setup()
     {
         parent::setUp();
 
-        $this->objectManager = new ObjectManager($this);
+        $objectManager = new ObjectManager($this);
 
-        $this->spamFilterStatus = $this->getMockBuilder(SpamFilterStatus::class)
+        $spamFilterStatus = $this->getMockBuilder(SpamFilterStatus::class)
             ->disableOriginalConstructor()
             ->setMethods(['getBlockedAlphabets'])->getMock();
 
-        $this->spamFilterStatus->method('getBlockedAlphabets')->willReturn(['/\p{Han}+/u','/\p{Cyrillic}+/u']);
+        $spamFilterStatus->method('getBlockedAlphabets')->willReturn(['/\p{Han}+/u','/\p{Cyrillic}+/u']);
 
-        $this->model = $this->objectManager->getObject(
+        $this->model = $objectManager->getObject(
             \PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator::class,
             [
-                'config' => $this->spamFilterStatus,
+                'config' => $spamFilterStatus,
                 'field' => 'firstname'
             ]
         );

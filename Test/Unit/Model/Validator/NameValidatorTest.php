@@ -9,11 +9,6 @@ class NameValidatorTest extends TestCase
 {
 
     /**
-     * @var $objectManager
-     */
-    private $objectManager;
-
-    /**
      * @var $model \PrOOxxy\SpamFilter\Model\Validator\NameValidator
      */
     private $model;
@@ -22,9 +17,9 @@ class NameValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->objectManager = new ObjectManager($this);
+        $objectManager = new ObjectManager($this);
 
-        $this->model = $this->objectManager->getObject(
+        $this->model = $objectManager->getObject(
             \PrOOxxy\SpamFilter\Model\Validator\NameValidator::class,
             ['field' => 'firstname']
         );
@@ -36,11 +31,11 @@ class NameValidatorTest extends TestCase
     public function isValid()
     {
         $strings = [
-            'facebook.com' => false,
-            'stringwithhttps://google.comstring' => false,
-            'Johnny Bravo' => true,
-            'string with https:// unfinished link' => false,
-            'string . with .com stuff' => true
+            'facebook.com'                          => false,
+            'stringwithhttps://google.comstring'    => false,
+            'Johnny Bravo'                          => true,
+            'string with https:// unfinished link'  => false,
+            'string . with .com stuff'              => true
         ];
 
         foreach ($strings as $string => $assertion) {
