@@ -18,12 +18,13 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 class SpamFilterStatus
 {
 
+    private const MODULE_STATUS_CONFIG_PATH = 'spamfilter/general/module_status';
+
     /**
      * @var ScopeConfigInterface
      */
     private $config;
 
-    private const MODULE_STATUS_CONFIG_PATH = 'spamfilter/general/module_status';
     /**
      * @var string
      */
