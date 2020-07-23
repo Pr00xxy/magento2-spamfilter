@@ -27,19 +27,21 @@ class NameValidatorTest extends TestCase
 
     /**
      * @test
+     * @dataProvider isValidDataProvider
      */
-    public function isValid()
+    public function isValid(string $input, bool $assert)
     {
-        $strings = [
-            'facebook.com'                          => false,
-            'stringwithhttps://google.comstring'    => false,
-            'Johnny Bravo'                          => true,
-            'string with https:// unfinished link'  => false,
-            'string . with .com stuff'              => true
-        ];
+        $this->assertEquals($this->model->isValid($input), $assert);
+    }
 
-        foreach ($strings as $string => $assertion) {
-            $this->assertEquals($this->model->isValid($string), $assertion);
-        }
+    public function isValidDataProvider()
+    {
+        return [
+            'Should detect FQDN'                        => ['input' => 'facebook.com','assert' => false],
+            'Should detect hidden full url'             => ['input' => 'stringwithhttps://google.comstring','assert' => false],
+            'Should detect unfinished url'              => ['input' => 'string with https:// unfinished link','assert' => false],
+            'Should not detect non existing'            => ['input' => 'Johnny Bravo','assert' => true],
+            'Should not detect fragments'               => ['input' => 'string . with .com stuff','assert' => true]
+        ];
     }
 }

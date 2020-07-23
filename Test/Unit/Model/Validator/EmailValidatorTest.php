@@ -8,12 +8,6 @@ use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 
 class EmailValidatorTest extends TestCase
 {
-
-    /**
-     * @var $model \PrOOxxy\SpamFilter\Model\Validator\EmailValidator
-     */
-    private $model;
-
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
@@ -23,19 +17,7 @@ class EmailValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $objectManager = new ObjectManager($this);
-
-        $this->spamFilterStatus = $this->getMockBuilder(SpamFilterStatus::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBlockedAddresses'])->getMock();
-
-        $this->model = $objectManager->getObject(
-            \PrOOxxy\SpamFilter\Model\Validator\EmailValidator::class,
-            [
-                'config' => $this->spamFilterStatus,
-                'field' => 'email'
-            ]
-        );
+        $this->spamFilterStatus = $this->prophesize(SpamFilterStatus::class);
     }
 
     /**
@@ -44,15 +26,9 @@ class EmailValidatorTest extends TestCase
      */
     public function isValid(string $email, bool $assertion)
     {
+        $this->spamFilterStatus->getBlockedAddresses()->willReturn(['*@blocked.com', '*@*.xyz', 'blocked@*.*']);
 
-        $this->spamFilterStatus->method('getBlockedAddresses')
-            ->willReturn(['*@blocked.com', '*@*.xyz', 'blocked@*.*']);
-
-        $this->assertEquals($this->model->isValid($email), $assertion);
-
-        if (!$assertion) {
-            $this->assertNotEmpty($this->model->getMessages());
-        }
+        $this->assertEquals($this->getTestClass()->isValid($email), $assertion);
     }
 
     public function isValidDataProvider(): array
@@ -71,5 +47,17 @@ class EmailValidatorTest extends TestCase
                 'assertion' => false
             ]
         ];
+    }
+
+    private function getTestClass(array $dependencies = [])
+    {
+        $objectManager = new ObjectManager($this);
+        return $objectManager->getObject(
+            \PrOOxxy\SpamFilter\Model\Validator\EmailValidator::class,
+            [
+            'config' => $this->spamFilterStatus->reveal(),
+            'field' => 'email'
+            ]
+        );
     }
 }

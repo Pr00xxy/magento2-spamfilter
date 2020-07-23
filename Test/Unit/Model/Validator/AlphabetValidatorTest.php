@@ -7,7 +7,6 @@ use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 
-
 class AlphabetValidatorTest extends TestCase
 {
 
