@@ -61,24 +61,16 @@ class ContactForm implements RulesInterface
         ];
 
         if ($this->filterStatus->isLinkBlockingEnabled()) {
-            $collection['name']->addValidator(
-                $this->validatorBuilder->getNewNameValidator('name')
-            );
+            $collection['name']->addValidator($this->validatorBuilder->getNewNameValidator('name'));
         }
 
         if ($this->filterStatus->isAlphabetBlockingEnabled()) {
-            $collection['name']->addValidator(
-                $this->validatorBuilder->getNewAlphabetValidator('name')
-            );
-            $collection['comment']->addValidator(
-                $this->validatorBuilder->getNewAlphabetValidator('comment')
-            );
+            $collection['name']->addValidator($this->validatorBuilder->getNewAlphabetValidator('name'));
+            $collection['comment']->addValidator($this->validatorBuilder->getNewAlphabetValidator('comment'));
         }
 
         if ($this->filterStatus->isEmailBlockingEnabled()) {
-            $collection['email']->addValidator(
-                $this->validatorBuilder->getNewEmailValidator('email')
-            );
+            $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
         }
 
         return $collection;

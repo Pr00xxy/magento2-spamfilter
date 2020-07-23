@@ -64,27 +64,17 @@ class AccountCreate implements RulesInterface
         }
 
         if ($this->filterStatus->isLinkBlockingEnabled()) {
-            $collection['firstname']->addValidator(
-                $this->validatorBuilder->getNewNameValidator('firstname')
-            );
-            $collection['lastname']->addValidator(
-                $this->validatorBuilder->getNewNameValidator('lastname')
-            );
+            $collection['firstname']->addValidator($this->validatorBuilder->getNewNameValidator('firstname'));
+            $collection['lastname']->addValidator($this->validatorBuilder->getNewNameValidator('lastname'));
         }
 
         if ($this->filterStatus->isAlphabetBlockingEnabled()) {
-            $collection['firstname']->addValidator(
-                $this->validatorBuilder->getNewAlphabetValidator('firstname')
-            );
-            $collection['lastname']->addValidator(
-                $this->validatorBuilder->getNewAlphabetValidator('lastname')
-            );
+            $collection['firstname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('firstname'));
+            $collection['lastname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('lastname'));
         }
 
         if ($this->filterStatus->isEmailBlockingEnabled()) {
-            $collection['email']->addValidator(
-                $this->validatorBuilder->getNewEmailValidator('email')
-            );
+            $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
         }
 
         return $collection;
