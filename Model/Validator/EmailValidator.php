@@ -11,24 +11,21 @@
  */
 declare(strict_types=1);
 
-
 namespace PrOOxxy\SpamFilter\Model\Validator;
 
-
+use Magento\Framework\Validator\ValidatorInterface;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 
-class EmailValidator extends \Zend_Validate_Abstract implements \Magento\Framework\Validator\ValidatorInterface
+class EmailValidator implements ValidatorInterface
 {
 
     private const INVALID = 'regexInvalid';
 
-    protected $_messageTemplates = [
-        self::INVALID   => "'%field%' is blocked by the spam filter"
+    protected $messageTemplates = [
+        self::INVALID   => "%s is blocked by the spam filter"
     ];
 
-    protected $_messageVariables = [
-        'field' => 'field'
-    ];
+    private $messages = [];
 
     /**
      * @var SpamFilterStatus
@@ -51,11 +48,21 @@ class EmailValidator extends \Zend_Validate_Abstract implements \Magento\Framewo
     public function isValid($email): bool
     {
         if ($this->isDomainBlocked($email)) {
-            $this->_error(self::INVALID);
+            $this->addMessage(self::INVALID);
             return false;
         }
 
         return true;
+    }
+
+    private function addMessage(string $messageKey): void
+    {
+        $this->messages[$messageKey] = sprintf($this->messageTemplates[$messageKey], $this->field);
+    }
+
+    public function getMessages(): array
+    {
+        return $this->messages;
     }
 
     private function isDomainBlocked(string $email): bool
@@ -85,4 +92,19 @@ class EmailValidator extends \Zend_Validate_Abstract implements \Magento\Framewo
 
         return false;
     }
+
+    public function setTranslator($translator = null)
+    {
+    }
+
+    public function hasTranslator()
+    {
+        return false;
+    }
+
+    public function getTranslator()
+    {
+        return null;
+    }
+
 }

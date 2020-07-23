@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model;
 
-use Magento\Framework\Validator;
+use Magento\Framework\Validator\ValidatorInterface;
 
 class RulesProcessor
 {
@@ -21,17 +21,15 @@ class RulesProcessor
     {
         $messages = [];
         foreach ($collection as $key => $validator) {
-            /** @var $validator Validator */
-            if (!$validator instanceof Validator) {
+            /** @var $validator ValidatorInterface */
+            if (!$validator instanceof ValidatorInterface) {
                 continue;
             }
-            if (\array_key_exists($key, $dataPosts)) {
-                if (!$validator->isValid($dataPosts[$key])) {
-                    $messages[] = \array_merge($messages, \array_values($validator->getMessages()));
-                }
+            if (\array_key_exists($key, $dataPosts) && !$validator->isValid($dataPosts[$key])) {
+                $messages[] = $validator->getMessages();
             }
         }
 
-        return $messages;
+        return count($messages) === 0 ? [] : array_values(...$messages);
     }
 }

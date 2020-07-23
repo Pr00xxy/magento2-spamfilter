@@ -9,10 +9,13 @@
  * @link       https://github.com/Pr00xxy
  *
  */
+declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model\Validator;
 
-class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framework\Validator\ValidatorInterface
+use Magento\Framework\Validator\ValidatorInterface;
+
+class NameValidator implements ValidatorInterface
 {
 
     /**
@@ -20,12 +23,14 @@ class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framewor
      */
     private $pattern = '/(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|))?/m';
 
+    private $messages = [];
+
     private const INVALID_NOT_STRING = 'nameInvalid';
     private const INVALID_LINK = 'nameInvalidLink';
 
-    protected $_messageTemplates = [
-        self::INVALID_LINK => "Provided '%field%' has embedded web url",
-        self::INVALID_NOT_STRING => "Provided '%field%' must be of type string"
+    protected $messageTemplates = [
+        self::INVALID_LINK => "Provided %1 has embedded web url",
+        self::INVALID_NOT_STRING => "Provided %1 must be of type string"
     ];
 
     /**
@@ -43,12 +48,12 @@ class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framewor
     {
 
         if (!\is_string($value)) {
-            $this->_error(self::INVALID_NOT_STRING);
+            $this->addMessage(self::INVALID_NOT_STRING);
             return false;
         }
 
         if ($this->stringHasLink($value)) {
-            $this->_error(self::INVALID_LINK);
+            $this->addMessage(self::INVALID_LINK);
             return false;
         }
 
@@ -58,6 +63,30 @@ class NameValidator extends \Zend_Validate_Abstract implements \Magento\Framewor
     private function stringHasLink(string $value): bool
     {
         return (bool) \preg_match($this->pattern, $value);
+    }
+
+    private function addMessage(string $messageKey): void
+    {
+        $this->messages[$messageKey] = sprintf($this->messageTemplates[$messageKey], $this->field);
+    }
+
+    public function getMessages(): array
+    {
+        return $this->messages;
+    }
+
+    public function setTranslator($translator = null)
+    {
+    }
+
+    public function hasTranslator()
+    {
+        return false;
+    }
+
+    public function getTranslator()
+    {
+        return null;
     }
 
 }

@@ -11,14 +11,12 @@
  */
 declare(strict_types=1);
 
-
 namespace PrOOxxy\SpamFilter\Model;
 
-use InvalidArgumentException;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory;
-use PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
+use PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory;
 
@@ -29,14 +27,17 @@ class ValidatorBuilder
      * @var NameValidatorFactory
      */
     private $nameValidatorFactory;
+
     /**
      * @var SpamFilterStatus
      */
     private $status;
+
     /**
      * @var AlphabetValidatorFactory
      */
     private $alphabetValidatorFactory;
+
     /**
      * @var EmailValidatorFactory
      */
@@ -56,7 +57,7 @@ class ValidatorBuilder
 
     public function getNewNameValidator(string $field): ?NameValidator
     {
-        if (!\in_array($field, ['firstname', 'lastname'])) {
+        if (!\in_array($field, ['firstname', 'lastname', 'name'])) {
             throw new \InvalidArgumentException('field must be either firstname or lastname');
         }
 
@@ -80,9 +81,8 @@ class ValidatorBuilder
 
     public function getNewEmailValidator(string $field): EmailValidator
     {
-
         if ($field !== 'email') {
-            throw new InvalidArgumentException('field must be email');
+            throw new \InvalidArgumentException('field must be email');
         }
 
         return $this->emailValidatorFactory->create(

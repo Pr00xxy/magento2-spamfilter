@@ -12,23 +12,21 @@
 
 namespace PrOOxxy\SpamFilter\Model\Validator;
 
+use Magento\Framework\Validator\ValidatorInterface;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 
-class AlphabetValidator extends \Zend_Validate_Abstract implements \Magento\Framework\Validator\ValidatorInterface
+class AlphabetValidator implements ValidatorInterface
 {
 
     private const INVALID_CHARACTER_SET = 'CHARSET_INVALID';
     private const INVALID_UNDEFINED_CHARSET = 'CHARSET_UNKNOWN_INVALID';
 
-    protected $_messageTemplates = [
-        self::INVALID_CHARACTER_SET => "The '%value%' does not allow the '%charset%' character set",
-        self::INVALID_UNDEFINED_CHARSET => "The '%value%' detected illegal characters"
+    protected $messageTemplates = [
+        self::INVALID_CHARACTER_SET => "The %s does not allow the %s character set",
+        self::INVALID_UNDEFINED_CHARSET => "The %s detected illegal characters"
     ];
 
-    protected $_messageVariables = [
-        'charset' => 'charset',
-        'field' => 'field'
-    ];
+    private $messages = [];
 
     /**
      * @var SpamFilterStatus
@@ -40,9 +38,6 @@ class AlphabetValidator extends \Zend_Validate_Abstract implements \Magento\Fram
      */
     protected $field;
 
-    /** @var string */
-    protected $charset = 'unknown';
-
     public function __construct(
         SpamFilterStatus $config,
         string $field
@@ -51,22 +46,35 @@ class AlphabetValidator extends \Zend_Validate_Abstract implements \Magento\Fram
         $this->field = $field;
     }
 
-    public function isValid($value)
+    public function isValid($value): bool
     {
         if (!$this->isFieldMatchingBlockedAlphabet($value)) {
             return true;
         }
 
         $alphabet = $this->getAlphabetByString($value);
+
         if ($alphabet === null) {
-            $this->_error(self::INVALID_UNDEFINED_CHARSET, $this->field);
+            $this->addMessage(self::INVALID_UNDEFINED_CHARSET);
         } else {
-            $this->charset = $alphabet;
-            $this->_error(self::INVALID_CHARACTER_SET, $this->field);
+            $this->addMessage(self::INVALID_CHARACTER_SET, [$this->field, $alphabet]);
         }
 
         return false;
 
+    }
+
+    public function getMessages(): array
+    {
+        return $this->messages;
+    }
+
+    private function addMessage(string $messageKey, array $fields = [])
+    {
+        if (empty($fields)) {
+            $fields = [$this->field];
+        }
+        $this->messages[$messageKey] = vsprintf($this->messageTemplates[$messageKey], $fields);
     }
 
     private function isFieldMatchingBlockedAlphabet(string $field): bool
@@ -89,6 +97,20 @@ class AlphabetValidator extends \Zend_Validate_Abstract implements \Magento\Fram
             }
         }
 
+        return null;
+    }
+
+    public function setTranslator($translator = null)
+    {
+    }
+
+    public function hasTranslator()
+    {
+        return false;
+    }
+
+    public function getTranslator()
+    {
         return null;
     }
 
