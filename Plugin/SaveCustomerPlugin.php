@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
 
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use PrOOxxy\SpamFilter\Model\Rules\AccountCreate;
@@ -40,7 +42,7 @@ class SaveCustomerPlugin
         AccountCreate $accountCreateRules,
         ManagerInterface $manager,
         RulesProcessor $rulesProcessor
-    )  {
+    ) {
         $this->accountCreateRules = $accountCreateRules;
         $this->manager = $manager;
         $this->rulesProcessor = $rulesProcessor;
@@ -48,12 +50,11 @@ class SaveCustomerPlugin
 
     /**
      * @throws LocalizedException
-     * @throws \Zend_Validate_Exception
      * @see \Magento\Customer\Api\CustomerRepositoryInterface::save
      */
     public function beforeSave(
-        \Magento\Customer\Api\CustomerRepositoryInterface $subject,
-        \Magento\Customer\Api\Data\CustomerInterface $customer,
+        CustomerRepositoryInterface $subject,
+        CustomerInterface $customer,
         $passwordHash = null
     ) {
 

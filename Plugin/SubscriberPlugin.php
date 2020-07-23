@@ -40,12 +40,15 @@ class SubscriberPlugin
         Newsletter $newsletterRules,
         ManagerInterface $manager,
         RulesProcessor $rulesProcessor
-    )  {
+    ) {
         $this->newsletterRules = $newsletterRules;
         $this->manager = $manager;
         $this->rulesProcessor = $rulesProcessor;
     }
 
+    /**
+     * @throws LocalizedException
+     */
     public function beforeSubscribe(\Magento\Newsletter\Model\Subscriber $subject, $email)
     {
         $dataPosts = [

@@ -17,6 +17,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use PrOOxxy\SpamFilter\Model\Rules\ContactForm;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
+use Magento\Framework\Controller\Result\RedirectFactory;
 
 class ContactFormPostPlugin
 {
@@ -36,14 +37,21 @@ class ContactFormPostPlugin
      */
     private $rulesProcessor;
 
+    /**
+     * @var RedirectFactory
+     */
+    private $redirectFactory;
+
     public function __construct(
         ContactForm $contactFormRules,
         ManagerInterface $manager,
-        RulesProcessor $rulesProcessor
-    )  {
+        RulesProcessor $rulesProcessor,
+        RedirectFactory $redirectFactory
+    ) {
         $this->contactFormRules = $contactFormRules;
         $this->manager = $manager;
         $this->rulesProcessor = $rulesProcessor;
+        $this->redirectFactory = $redirectFactory;
     }
 
     public function beforeExecute(
@@ -51,6 +59,8 @@ class ContactFormPostPlugin
     ) {
 
         $request = $subject->getRequest();
+
+        // A copy of the validation process that the original function executes.
         if (\trim($request->getParam('name')) === '') {
             throw new LocalizedException(__('Enter the Name and try again.'));
         }
@@ -75,7 +85,7 @@ class ContactFormPostPlugin
             foreach ($messages as $message) {
                 $this->manager->addErrorMessage($message);
             }
-            throw new LocalizedException(__('SpamFilter: Could not save customer'));
+            return $this->redirectFactory->create()->setPath('contact/index');
         }
 
         return null;
