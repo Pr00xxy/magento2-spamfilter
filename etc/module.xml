@@ -12,10 +12,5 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="PrOOxxy_SpamFilter" setup_version="0.1.0">
-        <sequence>
-            <module name="Magento_Customer" />
-            <module name="Magento_Newsletter" />
-            <module name="Magento_Contact" />
-        </sequence>
     </module>
 </config>

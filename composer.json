@@ -4,7 +4,7 @@
     "keywords": ["Magento 2", "Magento 2 module", "spam protection"],
     "license": "MIT",
     "type": "magento2-module",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "authors": [
         {
             "name": "Hampus Westman",
@@ -12,7 +12,10 @@
         }
     ],
     "require": {
-        "php": "~7.2|~7.3"
+        "php": ">=7.1",
+        "magento/module-customer": "~102",
+        "magento/module-newsletter": "~100",
+        "magento/module-contact": "100.3.*"
     },
     "autoload": {
         "files": [ "registration.php" ],
