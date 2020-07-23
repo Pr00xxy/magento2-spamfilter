@@ -5,7 +5,7 @@ of dealing spam users created by bots and/or foreign spam factories.
 
 ## Installation
 
-Use the package manager [composer](https://getcomposer.org/) to install.
+Use the [composer](https://getcomposer.org/) to install.
 
 ```bash
 composer install prooxxy/magento2-spamfilter
@@ -19,18 +19,20 @@ php bin/magento module:enable PrOOxxy_SpamFilter
 
 ### Alternative installation
 
-Download the [Latest release](https://github.com/Pr00xxy/magento2-dotenv/archive/0.2.0.zip)
+Download the [Latest release](https://github.com/Pr00xxy/magento2-spamfilter/archive/0.3.0.zip)
 
 ## Features
 
-This module provides blocking for three areas in your installation
+This module provides blocking for the following areas
 1. Customer registration
 2. Newsletter signup
 3. Contact Form
 
-All three areas can be configured independently to have custom rules for what can be inputted.
+All three areas can be configured independently.
 
 ![scoped config](docs/scoped_config.png)
+
+The following types of blocking can be enabled on all areas listed above
 
 ### Alphabet blocking
 
@@ -50,8 +52,8 @@ Block newsletter signup, customer registration or contact form entries from spec
 
 ## Compability
 
-Compability tested with Magento 2.3.x on PHP 7.3
-Compability with 2.2.x and PHP < 7.2 is not guaranteed but may work  
+Tested on Magento 2.3 with PHP 7
+Compability with 2.2.x is not verified
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
