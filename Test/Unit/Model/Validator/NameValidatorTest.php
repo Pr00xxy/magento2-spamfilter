@@ -13,7 +13,7 @@ class NameValidatorTest extends TestCase
      */
     private $model;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -31,7 +31,7 @@ class NameValidatorTest extends TestCase
      */
     public function isValid(string $input, bool $assert)
     {
-        $this->assertEquals($this->model->isValid($input), $assert);
+        self::assertEquals($this->model->isValid($input), $assert);
     }
 
     public function isValidDataProvider()

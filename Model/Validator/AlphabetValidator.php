@@ -74,7 +74,7 @@ class AlphabetValidator implements ValidatorInterface
         if (empty($fields)) {
             $fields = [$this->field];
         }
-        $this->messages[$messageKey] = vsprintf($this->messageTemplates[$messageKey], $fields);
+        $this->messages[$messageKey] = vsprintf(__($this->messageTemplates[$messageKey]), $fields);
     }
 
     private function isFieldMatchingBlockedAlphabet(string $field): bool
@@ -96,7 +96,6 @@ class AlphabetValidator implements ValidatorInterface
                 return $match[1];
             }
         }
-
         return null;
     }
 

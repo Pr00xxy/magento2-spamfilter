@@ -17,16 +17,19 @@ use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class RulesProcessorTest extends TestCase
 {
+
+    use ProphecyTrait;
 
     /**
      * @var $objectManager ObjectManager
      */
     private $objectManager;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -47,7 +50,7 @@ class RulesProcessorTest extends TestCase
 
         $result = $this->getTestClass()->process($collection, ['email' => 'test@example.com']);
 
-        $this->assertEquals($expectedErrorMessageResult, $result);
+        self::assertEquals($expectedErrorMessageResult, $result);
     }
 
     private function getTestClass(array $dependencies = []): RulesProcessor
