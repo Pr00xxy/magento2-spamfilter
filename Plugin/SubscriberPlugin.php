@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
 
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
+use PrOOxxy\SpamFilter\Exception\ValidatorException;
 use PrOOxxy\SpamFilter\Model\Rules\Newsletter;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
 
@@ -47,7 +47,7 @@ class SubscriberPlugin
     }
 
     /**
-     * @throws LocalizedException
+     * @throws ValidatorException
      */
     public function beforeSubscribe(\Magento\Newsletter\Model\Subscriber $subject, $email)
     {
@@ -63,7 +63,7 @@ class SubscriberPlugin
             foreach ($messages as $message) {
                 $this->manager->addErrorMessage($message);
             }
-            throw new LocalizedException(__('SpamFilter: Could not save customer'));
+            throw new ValidatorException(__('SpamFilter: Could not save customer'));
         }
 
         return null;

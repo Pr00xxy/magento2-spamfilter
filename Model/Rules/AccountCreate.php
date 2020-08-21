@@ -64,20 +64,35 @@ class AccountCreate implements RulesInterface
         }
 
         if ($this->filterStatus->isLinkBlockingEnabled()) {
-            $collection['firstname']->addValidator($this->validatorBuilder->getNewNameValidator('firstname'));
-            $collection['lastname']->addValidator($this->validatorBuilder->getNewNameValidator('lastname'));
+            $this->addNameValidator($collection);
         }
 
         if ($this->filterStatus->isAlphabetBlockingEnabled()) {
-            $collection['firstname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('firstname'));
-            $collection['lastname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('lastname'));
+            $this->addAlphabetValidator($collection);
         }
 
         if ($this->filterStatus->isEmailBlockingEnabled()) {
-            $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
+            $this->addEmailValidator($collection);
         }
 
         return $collection;
 
+    }
+
+    private function addNameValidator(array &$collection)
+    {
+        $collection['firstname']->addValidator($this->validatorBuilder->getNewNameValidator('firstname'));
+        $collection['lastname']->addValidator($this->validatorBuilder->getNewNameValidator('lastname'));
+    }
+
+    private function addAlphabetValidator(array &$collection)
+    {
+        $collection['firstname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('firstname'));
+        $collection['lastname']->addValidator($this->validatorBuilder->getNewAlphabetValidator('lastname'));
+    }
+
+    private function addEmailValidator(array &$collection)
+    {
+        $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
     }
 }

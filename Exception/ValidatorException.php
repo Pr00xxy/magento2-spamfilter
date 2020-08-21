@@ -9,15 +9,12 @@
  * @link       https://github.com/Pr00xxy
  *
  */
+declare(strict_types=1);
 
-namespace PrOOxxy\SpamFilter\Model\Rules;
+namespace PrOOxxy\SpamFilter\Exception;
 
-use Magento\Framework\Validator\ValidatorInterface;
+use Magento\Framework\Exception\LocalizedException;
 
-interface RulesInterface
+class ValidatorException extends LocalizedException
 {
-    /**
-     * @return ValidatorInterface[]
-     */
-    public function addRules(): array;
 }
