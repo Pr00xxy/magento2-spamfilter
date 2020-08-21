@@ -6,31 +6,32 @@ namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class AlphabetValidatorTest extends TestCase
 {
+
+    use ProphecyTrait;
 
     /**
      * @var $model \PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator
      */
     private $model;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
 
         $objectManager = new ObjectManager($this);
 
-        $spamFilterStatus = $this->getMockBuilder(SpamFilterStatus::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBlockedAlphabets'])->getMock();
+        $spamFilterStatus = $this->prophesize(SpamFilterStatus::class);
 
-        $spamFilterStatus->method('getBlockedAlphabets')->willReturn(['/\p{Han}+/u','/\p{Cyrillic}+/u']);
+        $spamFilterStatus->getBlockedAlphabets()->willReturn(['/\p{Han}+/u','/\p{Cyrillic}+/u']);
 
         $this->model = $objectManager->getObject(
             \PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator::class,
             [
-                'config' => $spamFilterStatus,
+                'config' => $spamFilterStatus->reveal(),
                 'field' => 'firstname'
             ]
         );
@@ -41,7 +42,7 @@ class AlphabetValidatorTest extends TestCase
      */
     public function isValid()
     {
-        $this->assertEquals(true, $this->model->isValid('Knut kragballe'));
+        self::assertEquals(true, $this->model->isValid('Knut kragballe'));
     }
 
     /**
@@ -49,7 +50,7 @@ class AlphabetValidatorTest extends TestCase
      */
     public function notValid()
     {
-        $this->assertEquals(false, $this->model->isValid('漢字'));
-        $this->assertArrayHasKey('CHARSET_INVALID', $this->model->getMessages());
+        self::assertEquals(false, $this->model->isValid('漢字'));
+        self::assertArrayHasKey('CHARSET_INVALID', $this->model->getMessages());
     }
 }

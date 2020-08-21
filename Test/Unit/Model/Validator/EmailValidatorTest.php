@@ -5,15 +5,19 @@ namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class EmailValidatorTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject
      */
     private $spamFilterStatus;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +32,7 @@ class EmailValidatorTest extends TestCase
     {
         $this->spamFilterStatus->getBlockedAddresses()->willReturn(['*@blocked.com', '*@*.xyz', 'blocked@*.*']);
 
-        $this->assertEquals($this->getTestClass()->isValid($email), $assertion);
+        self::assertEquals($this->getTestClass()->isValid($email), $assertion);
     }
 
     public function isValidDataProvider(): array

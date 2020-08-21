@@ -67,7 +67,7 @@ class NameValidator implements ValidatorInterface
 
     private function addMessage(string $messageKey): void
     {
-        $this->messages[$messageKey] = sprintf($this->messageTemplates[$messageKey], $this->field);
+        $this->messages[$messageKey] = sprintf(__($this->messageTemplates[$messageKey]), $this->field);
     }
 
     public function getMessages(): array
