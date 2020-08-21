@@ -18,9 +18,12 @@ use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
 use PrOOxxy\SpamFilter\Model\ValidatorBuilder;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ValidatorBuilderTest extends TestCase
 {
+
+    use ProphecyTrait;
 
     /**
      * @var $objectManager ObjectManager
@@ -42,7 +45,7 @@ class ValidatorBuilderTest extends TestCase
      */
     private $alphabetValidatorFactoryMock;
 
-    public function setup()
+    public function setUp(): void
     {
         $this->emailValidatorFactoryMock = $this->getMockBuilder(\PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory::class)->setMethods(['create'])->getMock();
         $this->nameValidatorFactoryMock = $this->getMockBuilder(\PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory::class)->setMethods(['create'])->getMock();

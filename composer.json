@@ -1,10 +1,10 @@
 {
     "name": "prooxxy/magento2-spamfilter",
-    "description": "Spam filter module for magento 2",
+    "description": "Spam filter module for Magento 2",
     "keywords": ["Magento 2", "Magento 2 module", "spam protection", "bot protection"],
     "license": "MIT",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "authors": [
         {
             "name": "Hampus Westman",
@@ -12,10 +12,14 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "magento/module-customer": "~102",
-        "magento/module-newsletter": "~100",
-        "magento/module-contact": "100.3.*"
+        "php": "7.4",
+        "magento/module-customer": "~103",
+        "magento/module-newsletter": "~100.4",
+        "magento/module-contact": "100.4"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2",
+        "phpunit/phpunit": "^9"
     },
     "autoload": {
         "files": [ "registration.php" ],

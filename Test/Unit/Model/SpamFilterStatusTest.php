@@ -17,16 +17,19 @@ use PHPUnit\Framework\TestCase;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class SpamFilterStatusTest extends TestCase
 {
+
+    use ProphecyTrait;
 
     /**
      * @var $objectManager ObjectManager
      */
     private $objectManager;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -38,7 +41,7 @@ class SpamFilterStatusTest extends TestCase
         $configMock = $this->prophesize(ScopeConfigInterface::class);
         $configMock->getValue(Argument::cetera())->willReturn("/\p{Cyrillic}+/u,/\p{Han}+/u");
         $class = $this->getTestClass(['config' => $configMock->reveal(), 'scope' => 'test']);
-        $this->assertEquals(["/\p{Cyrillic}+/u","/\p{Han}+/u"], $class->getBlockedAlphabets());
+        self::assertEquals(["/\p{Cyrillic}+/u","/\p{Han}+/u"], $class->getBlockedAlphabets());
     }
 
     public function testGetBlockedAddresses()
@@ -46,7 +49,7 @@ class SpamFilterStatusTest extends TestCase
         $configMock = $this->prophesize(ScopeConfigInterface::class);
         $configMock->getValue(Argument::cetera())->willReturn("*@gmail.com,*@*.ru");
         $class = $this->getTestClass(['config' => $configMock->reveal(), 'scope' => 'test']);
-        $this->assertEquals(["*@gmail.com","*@*.ru"], $class->getBlockedAddresses());
+        self::assertEquals(["*@gmail.com","*@*.ru"], $class->getBlockedAddresses());
     }
 
     private function getTestClass(array $dependencies): SpamFilterStatus
