@@ -63,7 +63,7 @@ class SubscriberPlugin
             foreach ($messages as $message) {
                 $this->manager->addErrorMessage($message);
             }
-            throw new ValidatorException(__('SpamFilter: Could not save customer'));
+            throw new ValidatorException(__('Customer does not pass spam filter validation'));
         }
 
         return null;
