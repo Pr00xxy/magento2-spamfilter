@@ -58,10 +58,15 @@ class Newsletter implements RulesInterface
         ];
 
         if ($this->filterStatus->isEmailBlockingEnabled()) {
-            $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
+            $this->addEmailValidator($collection);
         }
 
         return $collection;
 
+    }
+
+    private function addEmailValidator(array &$collection)
+    {
+        $collection['email']->addValidator($this->validatorBuilder->getNewEmailValidator('email'));
     }
 }

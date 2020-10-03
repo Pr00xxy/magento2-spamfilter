@@ -4,7 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2020-06-25
+## [2.0.0] - 2020-08-22
+### Added
+- Translation capability for validator message
+### Fixed
+- Compatibility with Magento 2.4
+- Compatibility with PHPUnit 9 and prophecy
+
+## [1.2.0] - 2020-08-22
+### Added
+- Backported translation for validator messages
+
+## [1.1.0] - 2020-08-22
+### Added
+- Custom ValidatorException
+- LICENSE file
+### Changed
+- Main plugins now throw ValidatorException
+
+## [1.0.0] - 2020-08-18
 ### Added
 - Compatibility chart
 ### Changed

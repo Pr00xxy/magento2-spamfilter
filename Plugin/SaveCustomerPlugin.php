@@ -15,8 +15,8 @@ namespace PrOOxxy\SpamFilter\Plugin;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
+use PrOOxxy\SpamFilter\Exception\ValidatorException;
 use PrOOxxy\SpamFilter\Model\Rules\AccountCreate;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
 
@@ -49,7 +49,7 @@ class SaveCustomerPlugin
     }
 
     /**
-     * @throws LocalizedException
+     * @throws ValidatorException()
      * @see \Magento\Customer\Api\CustomerRepositoryInterface::save
      */
     public function beforeSave(
@@ -72,7 +72,7 @@ class SaveCustomerPlugin
             foreach ($messages as $message) {
                 $this->manager->addErrorMessage($message);
             }
-            throw new LocalizedException(__('SpamFilter: Could not save customer'));
+            throw new ValidatorException(__('SpamFilter: Could not save customer'));
         }
 
         return null;
