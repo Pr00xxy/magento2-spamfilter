@@ -47,17 +47,17 @@ class ValidatorBuilderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->emailValidatorFactoryMock = $this->getMockBuilder(\PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory::class)->setMethods(['create'])->getMock();
-        $this->nameValidatorFactoryMock = $this->getMockBuilder(\PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory::class)->setMethods(['create'])->getMock();
-        $this->alphabetValidatorFactoryMock = $this->getMockBuilder(\PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory::class)->setMethods(['create'])->getMock();
+        $this->emailValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory::class);
+        $this->nameValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory::class);
+        $this->alphabetValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory::class);
 
-        $this->emailValidatorFactoryMock->method('create')->willReturn(
+        $this->emailValidatorFactoryMock->create()->willReturn(
             $this->prophesize(EmailValidator::class)->reveal()
         );
-        $this->nameValidatorFactoryMock->method('create')->willReturn(
+        $this->nameValidatorFactoryMock->create()->willReturn(
             $this->prophesize(NameValidator::class)->reveal()
         );
-        $this->alphabetValidatorFactoryMock->method('create')->willReturn(
+        $this->alphabetValidatorFactoryMock->create()->willReturn(
             $this->prophesize(AlphabetValidator::class)->reveal()
         );
 
@@ -94,9 +94,9 @@ class ValidatorBuilderTest extends TestCase
         $class = $this->objectManager->getObject(
             ValidatorBuilder::class,
             [
-                'emailValidatorFactory' => $this->emailValidatorFactoryMock,
-                'alphabetValidatorFactory' => $this->alphabetValidatorFactoryMock,
-                'nameValidatorFactory' => $this->nameValidatorFactoryMock
+                'emailValidatorFactory' => $this->emailValidatorFactoryMock->reveal(),
+                'alphabetValidatorFactory' => $this->alphabetValidatorFactoryMock->reveal(),
+                'nameValidatorFactory' => $this->nameValidatorFactoryMock->reveal()
             ]
         );
         return $class;
