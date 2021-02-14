@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace PrOOxxy\SpamFilter\Plugin;
 
 use Magento\Framework\Message\ManagerInterface;
+use Magento\Newsletter\Model\Subscriber;
 use PrOOxxy\SpamFilter\Exception\ValidatorException;
 use PrOOxxy\SpamFilter\Model\Rules\Newsletter;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
@@ -49,7 +50,7 @@ class SubscriberPlugin
     /**
      * @throws ValidatorException
      */
-    public function beforeSubscribe(\Magento\Newsletter\Model\Subscriber $subject, $email)
+    public function beforeSubscribe(Subscriber $subject, $email)
     {
         $dataPosts = [
             'email' => $email

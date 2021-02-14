@@ -12,11 +12,16 @@
 
 namespace PrOOxxy\SpamFilter\Test\Unit\Model;
 
+use InvalidArgumentException;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
+use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
+use PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
+use PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory;
 use PrOOxxy\SpamFilter\Model\ValidatorBuilder;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -31,25 +36,25 @@ class ValidatorBuilderTest extends TestCase
     private $objectManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $emailValidatorFactoryMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $nameValidatorFactoryMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $alphabetValidatorFactoryMock;
 
     public function setUp(): void
     {
-        $this->emailValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\EmailValidatorFactory::class);
-        $this->nameValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\NameValidatorFactory::class);
-        $this->alphabetValidatorFactoryMock = $this->prophesize(\PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory::class);
+        $this->emailValidatorFactoryMock = $this->prophesize(EmailValidatorFactory::class);
+        $this->nameValidatorFactoryMock = $this->prophesize(NameValidatorFactory::class);
+        $this->alphabetValidatorFactoryMock = $this->prophesize(AlphabetValidatorFactory::class);
 
         $this->emailValidatorFactoryMock->create()->willReturn(
             $this->prophesize(EmailValidator::class)->reveal()
@@ -72,7 +77,7 @@ class ValidatorBuilderTest extends TestCase
     public function getNewNameValidatorWithException()
     {
         $class = $this->getTestClass();
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $class->getNewNameValidator('invalid');
     }
 
@@ -84,7 +89,7 @@ class ValidatorBuilderTest extends TestCase
     public function getNewEmailValidatorWithException()
     {
         $class = $this->getTestClass();
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $class->getNewNameValidator('invalid');
     }
 

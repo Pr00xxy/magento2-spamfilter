@@ -4,12 +4,13 @@ namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
+use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
 
 class NameValidatorTest extends TestCase
 {
 
     /**
-     * @var $model \PrOOxxy\SpamFilter\Model\Validator\NameValidator
+     * @var $model NameValidator
      */
     private $model;
 
@@ -20,7 +21,7 @@ class NameValidatorTest extends TestCase
         $objectManager = new ObjectManager($this);
 
         $this->model = $objectManager->getObject(
-            \PrOOxxy\SpamFilter\Model\Validator\NameValidator::class,
+            NameValidator::class,
             ['field' => 'firstname']
         );
     }

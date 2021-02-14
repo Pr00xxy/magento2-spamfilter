@@ -3,8 +3,10 @@
 namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
+use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class EmailValidatorTest extends TestCase
@@ -13,7 +15,7 @@ class EmailValidatorTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $spamFilterStatus;
 
@@ -57,7 +59,7 @@ class EmailValidatorTest extends TestCase
     {
         $objectManager = new ObjectManager($this);
         return $objectManager->getObject(
-            \PrOOxxy\SpamFilter\Model\Validator\EmailValidator::class,
+            EmailValidator::class,
             [
             'config' => $this->spamFilterStatus->reveal(),
             'field' => 'email'
