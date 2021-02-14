@@ -13,9 +13,9 @@
 namespace PrOOxxy\SpamFilter\Test\Unit\Model;
 
 use InvalidArgumentException;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidatorFactory;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
@@ -29,11 +29,6 @@ class ValidatorBuilderTest extends TestCase
 {
 
     use ProphecyTrait;
-
-    /**
-     * @var $objectManager ObjectManager
-     */
-    private $objectManager;
 
     /**
      * @var MockObject
@@ -50,11 +45,17 @@ class ValidatorBuilderTest extends TestCase
      */
     private $alphabetValidatorFactoryMock;
 
+    /**
+     * @var \Prophecy\Prophecy\ObjectProphecy
+     */
+    private $spamFilterStatusMock;
+
     public function setUp(): void
     {
         $this->emailValidatorFactoryMock = $this->prophesize(EmailValidatorFactory::class);
         $this->nameValidatorFactoryMock = $this->prophesize(NameValidatorFactory::class);
         $this->alphabetValidatorFactoryMock = $this->prophesize(AlphabetValidatorFactory::class);
+        $this->spamFilterStatusMock = $this->prophesize(SpamFilterStatus::class);
 
         $this->emailValidatorFactoryMock->create()->willReturn(
             $this->prophesize(EmailValidator::class)->reveal()
@@ -65,8 +66,6 @@ class ValidatorBuilderTest extends TestCase
         $this->alphabetValidatorFactoryMock->create()->willReturn(
             $this->prophesize(AlphabetValidator::class)->reveal()
         );
-
-        $this->objectManager = new ObjectManager($this);
     }
 
     /**
@@ -95,15 +94,11 @@ class ValidatorBuilderTest extends TestCase
 
     private function getTestClass(array $dependencies = []): ValidatorBuilder
     {
-        /** @var $class ValidatorBuilder */
-        $class = $this->objectManager->getObject(
-            ValidatorBuilder::class,
-            [
-                'emailValidatorFactory' => $this->emailValidatorFactoryMock->reveal(),
-                'alphabetValidatorFactory' => $this->alphabetValidatorFactoryMock->reveal(),
-                'nameValidatorFactory' => $this->nameValidatorFactoryMock->reveal()
-            ]
+        return new ValidatorBuilder(
+            $this->nameValidatorFactoryMock->reveal(),
+            $this->alphabetValidatorFactoryMock->reveal(),
+            $this->emailValidatorFactoryMock->reveal(),
+            $this->spamFilterStatusMock->reveal()
         );
-        return $class;
     }
 }

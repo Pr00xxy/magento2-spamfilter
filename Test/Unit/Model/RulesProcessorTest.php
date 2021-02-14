@@ -32,8 +32,6 @@ class RulesProcessorTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->objectManager = new ObjectManager($this);
     }
 
     public function testProcess()
@@ -53,8 +51,8 @@ class RulesProcessorTest extends TestCase
         self::assertEquals($expectedErrorMessageResult, $result);
     }
 
-    private function getTestClass(array $dependencies = []): RulesProcessor
+    private function getTestClass(): RulesProcessor
     {
-        return $this->objectManager->getObject(RulesProcessor::class, $dependencies);
+        return new RulesProcessor();
     }
 }

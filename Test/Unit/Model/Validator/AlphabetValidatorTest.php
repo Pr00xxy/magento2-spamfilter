@@ -3,7 +3,6 @@
 
 namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
 use PrOOxxy\SpamFilter\Model\Validator\AlphabetValidator;
@@ -23,19 +22,11 @@ class AlphabetValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $objectManager = new ObjectManager($this);
-
         $spamFilterStatus = $this->prophesize(SpamFilterStatus::class);
 
         $spamFilterStatus->getBlockedAlphabets()->willReturn(['/\p{Han}+/u','/\p{Cyrillic}+/u']);
 
-        $this->model = $objectManager->getObject(
-            AlphabetValidator::class,
-            [
-                'config' => $spamFilterStatus->reveal(),
-                'field' => 'firstname'
-            ]
-        );
+        $this->model = new AlphabetValidator($spamFilterStatus->reveal(), 'firstname');
     }
 
     /**
