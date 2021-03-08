@@ -4,7 +4,7 @@
     "keywords": ["Magento 2", "Magento 2 module", "spam protection", "bot protection"],
     "license": "MIT",
     "type": "magento2-module",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "authors": [
         {
             "name": "Hampus Westman",
