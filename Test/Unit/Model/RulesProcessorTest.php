@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Hampus Westman 2020
+ * Copyright © Hampus Westman 2021
  * See LICENCE provided with this module for licence details
  *
  * @author     Hampus Westman <hampus.westman@gmail.com>
- * @copyright  Copyright (c)  {year} Hampus Westman
+ * @copyright  Copyright (c) 2021 Hampus Westman
  * @license    MIT License https://opensource.org/licenses/MIT
  * @link       https://github.com/Pr00xxy
  *
@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use PrOOxxy\SpamFilter\Model\RulesProcessor;
 use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
+use PrOOxxy\SpamFilter\Model\Validator\NameValidator;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -34,21 +35,38 @@ class RulesProcessorTest extends TestCase
         parent::setUp();
     }
 
-    public function testProcess()
+    private function getEmailMock()
     {
-
-        $generatedErrorMessage = ['INVALID_1' => 'error message 1', 'INVALID_2' => 'error message 2'];
-        $expectedErrorMessageResult = array_values($generatedErrorMessage);
-
+        $generatedErrorMessage = ['EMAIL_INVALID_1' => 'email message 1', 'EMAIL_INVALID_2' => 'email message 2'];
         $validator = $this->prophesize(EmailValidator::class);
         $validator->isValid(Argument::any())->willReturn(false);
         $validator->getMessages()->willReturn($generatedErrorMessage);
 
-        $collection = ['email' => $validator->reveal()];
+        return $validator->reveal();
+    }
 
-        $result = $this->getTestClass()->process($collection, ['email' => 'test@example.com']);
+    private function getNameMock()
+    {
+        $generatedErrorMessage = ['NAME_INVALID_1' => 'name message 1', 'NAME_INVALID_2' => 'name message 2'];
+        $validator = $this->prophesize(NameValidator::class);
+        $validator->isValid(Argument::any())->willReturn(false);
+        $validator->getMessages()->willReturn($generatedErrorMessage);
 
-        self::assertEquals($expectedErrorMessageResult, $result);
+        return $validator->reveal();
+    }
+
+    public function testProcess()
+    {
+
+        $collection = [
+            'email' => $this->getEmailMock(),
+            'name' => $this->getNameMock()
+        ];
+
+        $result = $this->getTestClass()->process($collection, ['email' => 'test@example.com', 'name' => 'Clark Olofsson']);
+
+        self::assertCount(4, $result);
+
     }
 
     private function getTestClass(): RulesProcessor

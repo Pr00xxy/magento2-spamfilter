@@ -1,14 +1,15 @@
 <?php
 /**
- * Copyright © Hampus Westman 2020
+ * Copyright © Hampus Westman 2021
  * See LICENCE provided with this module for licence details
  *
  * @author     Hampus Westman <hampus.westman@gmail.com>
- * @copyright  Copyright (c) 2020 Hampus Westman
+ * @copyright  Copyright (c) 2021 Hampus Westman
  * @license    MIT License https://opensource.org/licenses/MIT
  * @link       https://github.com/Pr00xxy
  *
  */
+
 declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model;
@@ -68,9 +69,15 @@ class SpamFilterStatus
 
     public function getBlockedAddresses(): array
     {
+        $rawAddresses = $this->config->getValue('spamfilter/general/email_blocked_addresses', self::CONFIG_SCOPE);
+
+        if (!$rawAddresses) {
+            return [];
+        }
+
         return (array) \preg_split(
             '/,|\n/',
-            $this->config->getValue('spamfilter/general/email_blocked_addresses', self::CONFIG_SCOPE)
+            $rawAddresses
         );
     }
 

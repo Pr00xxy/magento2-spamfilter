@@ -22,21 +22,36 @@ class NameValidatorTest extends TestCase
 
     /**
      * @test
-     * @dataProvider isValidDataProvider
+     * @dataProvider isValidDataProviderTrue
      */
-    public function isValid(string $input, bool $assert)
+    public function isValidShouldReturnTrue($string)
     {
-        self::assertEquals($this->model->isValid($input), $assert);
+        self::assertTrue($this->model->isValid($string));
     }
 
-    public function isValidDataProvider()
+    /**
+     * @test
+     * @dataProvider isValidDataProviderFalse
+     */
+    public function isValidShouldReturnFalse($string)
+    {
+        self::assertFalse($this->model->isValid($string));
+    }
+
+    public function isValidDataProviderFalse()
     {
         return [
-            'Should detect FQDN'                        => ['input' => 'facebook.com','assert' => false],
-            'Should detect hidden full url'             => ['input' => 'stringwithhttps://google.comstring','assert' => false],
-            'Should detect unfinished url'              => ['input' => 'string with https:// unfinished link','assert' => false],
-            'Should not detect non existing'            => ['input' => 'Johnny Bravo','assert' => true],
-            'Should not detect fragments'               => ['input' => 'string . with .com stuff','assert' => true]
+            'Should detect FQDN' => ['facebook.com'],
+            'Should detect hidden full url' => ['stringwithhttps://google.comstring'],
+            'Should detect unfinished url' => ['string with https:// unfinished link'],
+        ];
+    }
+
+    public function isValidDataProviderTrue()
+    {
+        return [
+            'Should not detect non existing' => ['Johnny Bravo'],
+            'Should not detect fragments' => ['string . with .com stuff']
         ];
     }
 }

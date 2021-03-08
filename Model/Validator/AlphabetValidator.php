@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Hampus Westman 2020
+ * Copyright © Hampus Westman 2021
  * See LICENCE provided with this module for licence details
  *
  * @author     Hampus Westman <hampus.westman@gmail.com>
- * @copyright  Copyright (c) 2020 Hampus Westman
+ * @copyright  Copyright (c) 2021 Hampus Westman
  * @license    MIT License https://opensource.org/licenses/MIT
  * @link       https://github.com/Pr00xxy
  *
@@ -22,7 +22,7 @@ class AlphabetValidator implements ValidatorInterface
     private const INVALID_UNDEFINED_CHARSET = 'CHARSET_UNKNOWN_INVALID';
 
     protected $messageTemplates = [
-        self::INVALID_CHARACTER_SET => "The %s does not allow the %s character set",
+        self::INVALID_CHARACTER_SET => "The %s field does not allow the %s character set",
         self::INVALID_UNDEFINED_CHARSET => "The %s detected illegal characters"
     ];
 
@@ -48,6 +48,8 @@ class AlphabetValidator implements ValidatorInterface
 
     public function isValid($value): bool
     {
+        $this->messages = [];
+
         if (!$this->isFieldMatchingBlockedAlphabet($value)) {
             return true;
         }
