@@ -24,25 +24,13 @@ use Magento\Framework\Controller\Result\RedirectFactory;
 class ContactFormPostPlugin
 {
 
-    /**
-     * @var ContactForm
-     */
-    private $contactFormRules;
+    private ContactForm $contactFormRules;
 
-    /**
-     * @var ManagerInterface
-     */
-    private $manager;
+    private ManagerInterface $manager;
 
-    /**
-     * @var RulesProcessor
-     */
-    private $rulesProcessor;
+    private RulesProcessor $rulesProcessor;
 
-    /**
-     * @var RedirectFactory
-     */
-    private $redirectFactory;
+    private RedirectFactory $redirectFactory;
 
     public function __construct(
         ContactForm $contactFormRules,

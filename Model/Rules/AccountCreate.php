@@ -9,6 +9,7 @@
  * @link       https://github.com/Pr00xxy
  *
  */
+
 declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model\Rules;
@@ -22,20 +23,11 @@ use Magento\Framework\ValidatorFactory;
 class AccountCreate implements RulesInterface
 {
 
-    /**
-     * @var SpamFilterStatus
-     */
-    private $filterStatus;
+    private SpamFilterStatus $filterStatus;
 
-    /**
-     * @var ValidatorBuilder
-     */
-    private $validatorBuilder;
+    private ValidatorBuilder $validatorBuilder;
 
-    /**
-     * @var ValidatorFactory
-     */
-    private $validatorFactory;
+    private ValidatorFactory $validatorFactory;
 
     public function __construct(
         SpamFilterStatus $filterStatus,

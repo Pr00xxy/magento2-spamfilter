@@ -22,21 +22,15 @@ class EmailValidator implements ValidatorInterface
 
     private const INVALID = 'regexInvalid';
 
-    protected $messageTemplates = [
+    private $messageTemplates = [
         self::INVALID   => "%s is blocked to prevent spam"
     ];
 
-    private $messages = [];
+    private array $messages = [];
 
-    /**
-     * @var SpamFilterStatus
-     */
-    private $config;
+    private SpamFilterStatus $config;
 
-    /**
-     * @var string
-     */
-    protected $field;
+    private string $field;
 
     public function __construct(
         SpamFilterStatus $config,

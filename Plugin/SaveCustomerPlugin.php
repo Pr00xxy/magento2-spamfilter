@@ -24,20 +24,11 @@ use PrOOxxy\SpamFilter\Model\RulesProcessor;
 class SaveCustomerPlugin
 {
 
-    /**
-     * @var AccountCreate
-     */
-    private $accountCreateRules;
+    private AccountCreate $accountCreateRules;
 
-    /**
-     * @var ManagerInterface
-     */
-    private $manager;
+    private ManagerInterface $manager;
 
-    /**
-     * @var RulesProcessor
-     */
-    private $rulesProcessor;
+    private RulesProcessor $rulesProcessor;
 
     public function __construct(
         AccountCreate $accountCreateRules,

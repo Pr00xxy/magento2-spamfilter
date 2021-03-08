@@ -23,15 +23,9 @@ use PrOOxxy\SpamFilter\Model\Validator\ValidatorFactory;
 class ValidatorBuilder
 {
 
-    /**
-     * @var SpamFilterStatus
-     */
-    private $status;
+    private SpamFilterStatus $status;
 
-    /**
-     * @var ValidatorFactory
-     */
-    private $validatorFactory;
+    private ValidatorFactory $validatorFactory;
 
     public function __construct(
         ValidatorFactory $validatorFactory,

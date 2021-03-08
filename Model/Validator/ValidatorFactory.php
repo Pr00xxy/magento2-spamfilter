@@ -20,10 +20,7 @@ use Magento\Framework\Validator\ValidatorInterface;
 class ValidatorFactory
 {
 
-    /**
-     * @var ObjectManagerInterface
-     */
-    private $objectManager;
+    private ObjectManagerInterface $objectManager;
 
     public function __construct(
         ObjectManagerInterface $objectManager

@@ -23,20 +23,11 @@ use PrOOxxy\SpamFilter\Model\RulesProcessor;
 class SubscriberPlugin
 {
 
-    /**
-     * @var RulesProcessor
-     */
-    private $rulesProcessor;
+    private RulesProcessor $rulesProcessor;
 
-    /**
-     * @var ManagerInterface
-     */
-    private $manager;
+    private ManagerInterface $manager;
 
-    /**
-     * @var Newsletter
-     */
-    private $newsletterRules;
+    private Newsletter $newsletterRules;
 
     public function __construct(
         Newsletter $newsletterRules,

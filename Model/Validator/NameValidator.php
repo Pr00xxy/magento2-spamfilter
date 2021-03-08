@@ -19,25 +19,19 @@ use Magento\Framework\Validator\ValidatorInterface;
 class NameValidator implements ValidatorInterface
 {
 
-    /**
-     * @var string
-     */
-    private $pattern = '/(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|))?/m';
+    private string $pattern = '/(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|))?/m';
 
-    private $messages = [];
+    private array $messages = [];
 
     private const INVALID_NOT_STRING = 'nameInvalid';
     private const INVALID_LINK = 'nameInvalidLink';
 
-    protected $messageTemplates = [
+    private array $messageTemplates = [
         self::INVALID_LINK => "Provided %1 has embedded web url",
         self::INVALID_NOT_STRING => "Provided %1 must be of type string"
     ];
 
-    /**
-     * @var string
-     */
-    protected $field;
+    private string $field;
 
     public function __construct(
         string $field

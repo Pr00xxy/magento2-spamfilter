@@ -10,6 +10,8 @@
  *
  */
 
+declare(strict_types=1);
+
 namespace PrOOxxy\SpamFilter\Model\Validator;
 
 use Magento\Framework\Validator\ValidatorInterface;
@@ -21,22 +23,16 @@ class AlphabetValidator implements ValidatorInterface
     private const INVALID_CHARACTER_SET = 'CHARSET_INVALID';
     private const INVALID_UNDEFINED_CHARSET = 'CHARSET_UNKNOWN_INVALID';
 
-    protected $messageTemplates = [
+    private $messageTemplates = [
         self::INVALID_CHARACTER_SET => "The %s field does not allow the %s character set",
         self::INVALID_UNDEFINED_CHARSET => "The %s detected illegal characters"
     ];
 
-    private $messages = [];
+    private array $messages = [];
 
-    /**
-     * @var SpamFilterStatus
-     */
-    private $config;
+    private SpamFilterStatus $config;
 
-    /**
-     * @var string
-     */
-    protected $field;
+    private string $field;
 
     public function __construct(
         SpamFilterStatus $config,

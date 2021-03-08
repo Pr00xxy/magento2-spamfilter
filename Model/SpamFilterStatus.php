@@ -22,17 +22,11 @@ class SpamFilterStatus
 
     private const MODULE_STATUS_CONFIG_PATH = 'spamfilter/general/module_status';
 
-    protected const CONFIG_SCOPE = ScopeInterface::SCOPE_WEBSITES;
+    private const CONFIG_SCOPE = ScopeInterface::SCOPE_WEBSITES;
 
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $config;
+    private ScopeConfigInterface $config;
 
-    /**
-     * @var string
-     */
-    private $scope;
+    private string $scope;
 
     public function __construct(
         ScopeConfigInterface $config,

@@ -16,26 +16,16 @@ namespace PrOOxxy\SpamFilter\Model\Rules;
 
 use Magento\Framework\ValidatorFactory;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
-use PrOOxxy\SpamFilter\Model\Validator\DefaultValidator;
 use PrOOxxy\SpamFilter\Model\ValidatorBuilder;
 
 class Newsletter implements RulesInterface
 {
 
-    /**
-     * @var SpamFilterStatus
-     */
-    private $filterStatus;
+    private SpamFilterStatus $filterStatus;
 
-    /**
-     * @var ValidatorBuilder
-     */
-    private $validatorBuilder;
+    private ValidatorBuilder $validatorBuilder;
 
-    /**
-     * @var ValidatorFactory
-     */
-    private $validatorFactory;
+    private ValidatorFactory $validatorFactory;
 
     public function __construct(
         SpamFilterStatus $filterStatus,
