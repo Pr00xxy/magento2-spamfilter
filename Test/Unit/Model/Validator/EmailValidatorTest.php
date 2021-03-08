@@ -3,8 +3,11 @@
 namespace PrOOxxy\SpamFilter\Test\Unit\Model\Validator;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use PharIo\Manifest\Email;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use PrOOxxy\SpamFilter\Model\SpamFilterStatus;
+use PrOOxxy\SpamFilter\Model\Validator\EmailValidator;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class EmailValidatorTest extends TestCase
@@ -13,15 +16,22 @@ class EmailValidatorTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $spamFilterStatus;
+
+    /**
+     * @var EmailValidator
+     */
+    private $model;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->spamFilterStatus = $this->prophesize(SpamFilterStatus::class);
+
+        $this->model = new EmailValidator($this->spamFilterStatus->reveal(), 'email');
     }
 
     /**
@@ -32,7 +42,7 @@ class EmailValidatorTest extends TestCase
     {
         $this->spamFilterStatus->getBlockedAddresses()->willReturn(['*@blocked.com', '*@*.xyz', 'blocked@*.*']);
 
-        self::assertEquals($this->getTestClass()->isValid($email), $assertion);
+        self::assertEquals($this->model->isValid($email), $assertion);
     }
 
     public function isValidDataProvider(): array
@@ -53,15 +63,4 @@ class EmailValidatorTest extends TestCase
         ];
     }
 
-    private function getTestClass(array $dependencies = [])
-    {
-        $objectManager = new ObjectManager($this);
-        return $objectManager->getObject(
-            \PrOOxxy\SpamFilter\Model\Validator\EmailValidator::class,
-            [
-            'config' => $this->spamFilterStatus->reveal(),
-            'field' => 'email'
-            ]
-        );
-    }
 }

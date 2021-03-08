@@ -43,16 +43,19 @@ e.g you may block Cyrillic or Hanzi characters
 
 ### Link blocking
 
-Sometimes malicious users will try to trick you into clicking links by embedding them in the account information
-or in the contact message.
+Prevents malicious actors to send web links in the customer information or contact forms
 
 This feature allows the store owner to:
 * block contact form entries from containing web links
-* block customers from putting links in their firstname or lastname
+* block customers from putting links in their firstname or lastname on customer registration
 
 ### Email Blocking
 
-Block newsletter signup, customer registration or contact form entries from specific domains
+Block newsletter signup, customer registration or contact form entries from specific domains or matching patterns.
+
+For example a store owner may configure wildcard patterns like:
+
+`*@yandex.ru, *@*.fi`
 
 ![block known domains](docs/spam_reg_domain.png)
 
@@ -64,4 +67,5 @@ Block newsletter signup, customer registration or contact form entries from spec
 | `2.x` |      ×      |      ×      |      ✓      |
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

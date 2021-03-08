@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Plugin;
 
+use Magento\Contact\Controller\Index\Post;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use PrOOxxy\SpamFilter\Model\Rules\ContactForm;
@@ -55,7 +56,7 @@ class ContactFormPostPlugin
     }
 
     public function beforeExecute(
-        \Magento\Contact\Controller\Index\Post $subject
+        Post $subject
     ) {
 
         $request = $subject->getRequest();

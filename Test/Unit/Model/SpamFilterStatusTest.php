@@ -24,23 +24,16 @@ class SpamFilterStatusTest extends TestCase
 
     use ProphecyTrait;
 
-    /**
-     * @var $objectManager ObjectManager
-     */
-    private $objectManager;
-
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->objectManager = new ObjectManager($this);
     }
 
     public function testGetBlockedAlphabets()
     {
         $configMock = $this->prophesize(ScopeConfigInterface::class);
         $configMock->getValue(Argument::cetera())->willReturn("/\p{Cyrillic}+/u,/\p{Han}+/u");
-        $class = $this->getTestClass(['config' => $configMock->reveal(), 'scope' => 'test']);
+        $class = $this->getTestClass([$configMock->reveal(), 'test']);
         self::assertEquals(["/\p{Cyrillic}+/u","/\p{Han}+/u"], $class->getBlockedAlphabets());
     }
 
@@ -48,12 +41,12 @@ class SpamFilterStatusTest extends TestCase
     {
         $configMock = $this->prophesize(ScopeConfigInterface::class);
         $configMock->getValue(Argument::cetera())->willReturn("*@gmail.com,*@*.ru");
-        $class = $this->getTestClass(['config' => $configMock->reveal(), 'scope' => 'test']);
+        $class = $this->getTestClass([$configMock->reveal(), 'test']);
         self::assertEquals(["*@gmail.com","*@*.ru"], $class->getBlockedAddresses());
     }
 
     private function getTestClass(array $dependencies): SpamFilterStatus
     {
-        return $this->objectManager->getObject(SpamFilterStatus::class, $dependencies);
+        return new SpamFilterStatus(...$dependencies);
     }
 }

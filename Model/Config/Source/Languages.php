@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace PrOOxxy\SpamFilter\Model\Config\Source;
 
-class Languages implements \Magento\Framework\Data\OptionSourceInterface
+use Magento\Framework\Data\OptionSourceInterface;
+
+class Languages implements OptionSourceInterface
 {
     public function toOptionArray(): array
     {
