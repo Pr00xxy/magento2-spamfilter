@@ -59,12 +59,15 @@ For example a store owner may configure wildcard patterns like:
 
 ![block known domains](docs/spam_reg_domain.png)
 
-## Compability Matrix
+## Compatibility Matrix
+
+NOTE: 1.x and 2.x are no longer maintained
 
 |       | Magento 2.2 | Magento 2.3 | Magento 2.4 |
 |-------|-------------|-------------|-------------|
 | `1.x` |      ×      |      ✓      |      ×      |
-| `2.x` |      ×      |      ×      |      ✓      |
+| `2.x` |      ×      |      ×      |      ✓      | 
+| `3.x` |      ×      |      ×      |      ✓      |
 
 ## License
 
